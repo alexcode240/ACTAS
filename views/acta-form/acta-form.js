@@ -194,120 +194,295 @@ function NumeroALetras(num) {
 }
 
 
-let extraerNumerosFechaHoraMinutos = (fecha) =>{
+let extraerNumerosFecha = (fecha, tiempo) =>{
+    try {
+      let fechaHora = "";
+      let hora = "";
+      let minutos = "";
+      let fechaFormateada = "";
 
-    let fechaHoraMinutos = fecha.split(' ');
-    let fechaHora = fechaHoraMinutos[0].split(':');
-    let horaMinutos = fechaHoraMinutos[1].split(':');
-    let hora = horaMinutos[0];
-    let minutos = horaMinutos[1];
+      if(tiempo){
 
-    let fechaFormateada = fechaHora[0].split('-');
+        let fechaHoraMinutos = fecha.split(' ');
+        fechaHora = fechaHoraMinutos[0].split(':');
+        let horaMinutos = fechaHoraMinutos[1].split(':');
+        hora = horaMinutos[0];
+        minutos = horaMinutos[1];
+        fechaFormateada = fechaHora[0].split('-');
+      }else{
+        fechaFormateada = fecha.split('-');
+      }
 
-    let dia = fechaFormateada[0];
-    let mes = fechaFormateada[1];
-    let anio = fechaFormateada[2]; 
+      let anio = fechaFormateada[0];
+      let mes = fechaFormateada[1];
+      let dia = fechaFormateada[2]; 
 
-    return {
-        dia: dia,
-        mes: mes,
-        anio: anio,
-        hora: hora,
-        minutos: minutos
+      if(tiempo){
+        return {
+            dia: dia,
+            mes: mes,
+            anio: anio,
+            hora: hora,
+            minutos: minutos
+        }
+      }else{
+        return {
+            dia: dia,
+            mes: mes,
+            anio: anio
+        }
+      }
+    } catch (error) {
+      console.log("Error formato de fecha incorrecto");
+      return{ 
+        dia: "",
+        mes: "",
+        anio: "",
+        hora: "",
+        minutos: ""
+      }
     }
-}
-
-let extraerNumerosFecha = (fecha) => {
-
-  let fechaFormateada = fecha.split("-");
-
-  let dia = fechaFormateada[0];
-  let mes = fechaFormateada[1];
-  let anio = fechaFormateada[2];
-
-  return {
-    dia: dia,
-    mes: mes,
-    anio: anio
-  };
-};
-
-
-let fechaHoraMinutosEnPalabras = (fecha)=>{
-
-    let dia = NumeroALetras(fecha.dia);
-
-    let mes = "";
-
-    if(fecha.mes == 1){
-        mes = "enero";
-    }else if(fecha.mes == 2){
-        mes = "febrero";
-    }else if(fecha.mes == 3){
-        mes = "marzo";
-    }else if(fecha.mes == 4){
-        mes = "abril";
-    }else if(fecha.mes == 5){
-        mes = "mayo";
-    }else if(fecha.mes == 6){
-        mes = "junio";
-    }else if(fecha.mes == 7){
-        mes = "julio";
-    }else if(fecha.mes == 8){
-        mes = "agosto";
-    }else if(fecha.mes == 9){
-        mes = "septiembre";
-    }else if(fecha.mes == 10){
-        mes = "octubre";
-    }else if(fecha.mes == 11){
-        mes = "noviembre";
-    }else if(fecha.mes == 12){
-        mes = "diciembre";
-    }
-
-    let anio = NumeroALetras(fecha.anio);
-    let hora = NumeroALetras(fecha.hora);
-    let minutos = NumeroALetras(fecha.minutos);
-
-    return {
-      dia: dia.toLowerCase(),
-      mes: mes.toLowerCase(),
-      anio: anio.toLowerCase(),
-      hora: hora.toLowerCase(),
-      minutos: minutos.toLowerCase(),
-    };
-
+    
 }
 
 
-console.log(fechaHoraMinutosEnPalabras(extraerNumerosFechaHoraMinutos('01-03-2022 00:00:00')));
+let fechaEnPalabras = (fecha, tiempo)=>{
+
+    if(fecha.dia != ""){
+      let dia = NumeroALetras(fecha.dia);
+
+      let mes = "";
+
+      if(fecha.mes == 1){
+          mes = "enero";
+      }else if(fecha.mes == 2){
+          mes = "febrero";
+      }else if(fecha.mes == 3){
+          mes = "marzo";
+      }else if(fecha.mes == 4){
+          mes = "abril";
+      }else if(fecha.mes == 5){
+          mes = "mayo";
+      }else if(fecha.mes == 6){
+          mes = "junio";
+      }else if(fecha.mes == 7){
+          mes = "julio";
+      }else if(fecha.mes == 8){
+          mes = "agosto";
+      }else if(fecha.mes == 9){
+          mes = "septiembre";
+      }else if(fecha.mes == 10){
+          mes = "octubre";
+      }else if(fecha.mes == 11){
+          mes = "noviembre";
+      }else if(fecha.mes == 12){
+          mes = "diciembre";
+      }
+
+      let anio = NumeroALetras(fecha.anio);
+      let hora = NumeroALetras(fecha.hora);
+      let minutos = NumeroALetras(fecha.minutos);
+
+      if(tiempo){
+
+        return {
+          dia: dia.toLowerCase(),
+          mes: mes.toLowerCase(),
+          anio: anio.toLowerCase(),
+          hora: hora.toLowerCase(),
+          minutos: minutos.toLowerCase(),
+        };
+      } else{
+
+        return {
+          dia: dia.toLowerCase(),
+          mes: mes.toLowerCase(),
+          anio: anio.toLowerCase(),
+        };
+      }
+    }else{
+      return {
+        dia: "",
+        mes: "",
+        anio: "",
+        hora: "",
+        minutos: ""
+      }
+    }
+
+}
+
+console.log(fechaEnPalabras(extraerNumerosFecha('2022-03-01', false) , false));
 
 $(".selectorArea").select2();
 
+
  $("#fechaElaboracion").datetimepicker({
-   format: "DD-MM-YYYY HH:mm",
+   format: "YYYY-MM-DD HH:mm",
    icons: {
      time: "far fa-clock",
    },
  });
 
-  $("#fechaElaboracionOficio").datetimepicker({
-    format: "DD-MM-YYYY",
-    icons: {
-      time: "far fa-clock",
-    },
+$("#fechaElaboracionOficio").datetimepicker({
+  format: "YYYY-MM-DD",
+  icons: {
+    time: "far fa-clock",
+  },
+});
+
+$("#fechaNotificacionOficio").datetimepicker({
+  format: "YYYY-MM-DD",
+  icons: {
+    time: "far fa-clock",
+  },
+});
+
+$("#fechaInicioLevantamiento").datetimepicker({
+  format: "YYYY-MM-DD HH:mm",
+  icons: {
+    time: "far fa-clock",
+  },
+});
+
+$("#fechaFinLevantamiento").datetimepicker({
+  format: "YYYY-MM-DD HH:mm",
+  icons: {
+    time: "far fa-clock",
+  },
+});
+
+let validarDatos = () => {
+  let validacion = true;
+
+  if ($(".fechaElaboracion").val() == "") {
+    validacion = false;
+    $(".fechaElaboracion").addClass("is-invalid");
+  } else {
+    $(".fechaElaboracion").removeClass("is-invalid");
+  }
+
+  if ($(".fechaElaboracionOficio").val() == "") {
+    validacion = false;
+    $(".fechaElaboracionOficio").addClass("is-invalid");
+  } else {
+    $(".fechaElaboracionOficio").removeClass("is-invalid");
+  }
+
+  if ($(".fechaNotificacionOficio").val() == "") {
+    validacion = false;
+    $(".fechaNotificacionOficio").addClass("is-invalid");
+  } else {
+    $(".fechaNotificacionOficio").removeClass("is-invalid");
+  }
+
+  if ($(".fechaInicioLevantamiento").val() == "") {
+    validacion = false;
+    $(".fechaInicioLevantamiento").addClass("is-invalid");
+  } else {
+    $(".fechaInicioLevantamiento").removeClass("is-invalid");
+  }
+
+  if ($(".fechaFinLevantamiento").val() == "") {
+    validacion = false;
+    $(".fechaFinLevantamiento").addClass("is-invalid");
+  } else {
+    $(".fechaFinLevantamiento").removeClass("is-invalid");
+  }
+
+  if ($(".selectorArea").val() == "") {
+    validacion = false;
+    $("#area > span > span.selection > span").addClass("has-error");
+  } else {
+    $("#area > span > span.selection > span").removeClass("has-error");
+  }
+
+
+  if($(".folio").val() == ""){
+    validacion = false;
+    $(".folio").addClass("is-invalid");
+  }else{
+    $(".folio").removeClass("is-invalid");
+  }
+}
+
+$(".formulario").on("change", () => {
+  validarDatos();
+});
+
+
+$("#generarActa")
+  .click(function () {
+
+    //if (!validarDatos()) {
+      //alert("Faltan datos por llenar");
+
+      //return;
+    //}
+    let area = $(".selectorArea").val();
+    let fechaElaboracion = $(".fechaElaboracion").val();
+    let folio = $(".folio").val();
+    let fechaElaboracionOficio = $(".fechaElaboracionOficio").val();
+    let fechaNotificacionOficio = $(".fechaNotificacionOficio").val();
+    let fechaInicioLevantamiento = $(".fechaInicioLevantamiento").val();
+    let fechaFinLevantamiento = $(".fechaFinLevantamiento").val();
+    
+    
+
+    let fcFechaElaboracionOficio = fechaEnPalabras(
+      extraerNumerosFecha(fechaElaboracionOficio, false),
+      false
+    );
+    fcFechaElaboracionOficio = JSON.stringify(fcFechaElaboracionOficio);
+    let fdFechaElaboracionOficio = fechaElaboracionOficio;
+
+    let fcFechaNotificacionOficio = fechaEnPalabras(
+      extraerNumerosFecha(fechaNotificacionOficio, false),
+      false
+    );
+    fcFechaNotificacionOficio = JSON.stringify(fcFechaNotificacionOficio);
+
+    let fdFechaNotificacionOficio = fechaNotificacionOficio;
+
+    var datos = new FormData();
+    datos.append("FCOFICIO", folio);
+    datos.append("FCFECHANOTIFICACION", fcFechaNotificacionOficio);
+    datos.append("FDFECHANOTIFICACION", fdFechaNotificacionOficio);
+    datos.append("FCFECHA", fcFechaElaboracionOficio);
+    datos.append("FDFECHA", fdFechaElaboracionOficio);
+    
+    $.ajax({
+      url: "ajax/generar-acta.ajax.php",
+      method: "POST",
+      data: datos,
+      cache: false,
+      contentType: false,
+      processData: false,
+      dataType: "json",
+      success: function (respuesta) {
+       if(respuesta){
+         swal({
+           type: "success",
+           title: "¡El acta ha sido guardada correctamente!",
+           showConfirmButton: true,
+           confirmButtonText: "Cerrar",
+         }).then(function (result) {
+           if (result.value) {
+             window.location = "oficios";
+           }
+         });
+       }else{
+         swal({
+           type: "error",
+           title: "¡El acta no pudo ser guardada correctamente!",
+           showConfirmButton: true,
+           confirmButtonText: "Cerrar",
+         }).then(function (result) {
+           if (result.value) {
+             window.location = "oficios";
+           }
+         });
+       }
+      },
+    });
   });
-
-    $("#fechaNotificacionOficio").datetimepicker({
-      format: "DD-MM-YYYY",
-      icons: {
-        time: "far fa-clock",
-      },
-    });
-
-    $("#fechaLevantamiento").datetimepicker({
-      format: "DD-MM-YYYY HH:mm",
-      icons: {
-        time: "far fa-clock",
-      },
-    });

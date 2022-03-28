@@ -47,6 +47,8 @@
     <link rel="stylesheet" href="views/plugins/bs-stepper/css/bs-stepper.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="views/dist/css/adminlte.min.css">
+
+    <link rel="stylesheet" href="views/acta-form/acta-form.css">
 </head>
 
 <!--<body class="hold-transition sidebar-mini">-->
@@ -106,6 +108,9 @@
     <!-- InputMask -->
     <script src="views/plugins/moment/moment.min.js"></script>
 
+    <!-- sweet alert -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <script src="views/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
     <!-- AdminLTE App -->
     <script src="views/dist/js/adminlte.min.js"></script>
@@ -124,7 +129,7 @@
             });
 
             //Date and time picker
-           
+
 
 
 
