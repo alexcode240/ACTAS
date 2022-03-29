@@ -92,7 +92,7 @@ class WordController
 
         $phpWord->addTitleStyle(1, array('size' => 11), array('numStyle' => 'hNum', 'numLevel' => 0));
 
-        $section->addTitle('Los Servidores Públicos con adscripción al Órgano Interno de Control, a la Subdirección de Patrimonio Municipal, a la Segunda Sindicatura y al ', 1);
+        $section->addTitle('Los Servidores Públicos con adscripción al Órgano Interno de Control, a la Subdirección de Patrimonio Municipal, a la Segunda Sindicatura y al '.$respuesta["FCAREA"].', se constituyen el día, hora y lugar referido en el párrafo primero de la presente Acta Circunstanciada, esto en atención al oficio con número de folio '.$respuesta["FCOFICIO"].', de fecha once de marzo de 2022, suscrito por el C.P. Ricardo Contreras Velázquez, Contralor Interno Municipal, el cual fue notificado el día dieciséis de marzo de 2022, al C. Eduardo Isaac Almaraz Nicolás en su carácter de Enlace Administrativo del INSTITUTO MUNICIPAL DE LA JUVENTUD de Tlalnepantla de Baz, Estado de México, administración 2022-2024, a fin de comunicarle que el PRIMER LEVANTAMIENTO FÍSICO DE BIENES MUEBLES DE 2022, sería el tres de junio del 2022, a partir de las diez horas, para verificar la existencia física de los bienes muebles en uso y custodia del Instituto, con base en el LISTADO DE BIENES MUEBLES DEL PRIMER LEVANTAMIENTO FÍSICO 2022, del INSTITUTO MUNICIPAL DE LA JUVENTUD, expedido por la Subdirección de Patrimonio Municipal, dependiente de la Secretaría del Ayuntamiento.', 1);
         
         $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
 

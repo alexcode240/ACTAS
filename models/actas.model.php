@@ -62,16 +62,16 @@ class ModelActas
                                                     BIENES.FIBMPBAJOCOSTO,
                                                     BIENES.FIBMFACTIVOFIJO,
                                                     BIENES.FIBMFBAJOCOSTO,
-                                                    IFNULL((SELECT FCNOMBRE FROM tbempleados WHERE tbempleados.FIAREAID = AREAS.FIAREAID AND tbempleados.FICARGOID = 1),'') AS FCCONTRALOR,
-                                                    IFNULL((SELECT FCNOMBRE FROM tbempleados WHERE tbempleados.FIAREAID = AREAS.FIAREAID AND tbempleados.FICARGOID = 2),'') AS FCPATRIMONIO,
-                                                    IFNULL((SELECT FCNOMBRE FROM tbempleados WHERE tbempleados.FIAREAID = AREAS.FIAREAID AND tbempleados.FICARGOID = 3),'') AS FCJEFEPATRIMONIO,
-                                                    IFNULL((SELECT FCNOMBRE FROM tbempleados WHERE tbempleados.FIAREAID = AREAS.FIAREAID AND tbempleados.FICARGOID = 4),'') AS FCSSINDICATURA,
-                                                    IFNULL((SELECT FCNOMBRE FROM tbempleados WHERE tbempleados.FIAREAID = AREAS.FIAREAID AND tbempleados.FICARGOID = 5),'') AS FCENLACE,
-                                                    IFNULL((SELECT FCEMPLEADO FROM tbempleados WHERE tbempleados.FIAREAID = AREAS.FIAREAID AND tbempleados.FICARGOID = 1),'') AS FCNUMCONTRALOR,
-                                                    IFNULL((SELECT FCEMPLEADO FROM tbempleados WHERE tbempleados.FIAREAID = AREAS.FIAREAID AND tbempleados.FICARGOID = 2),'') AS FCNUMPATRIMONIO,
-                                                    IFNULL((SELECT FCEMPLEADO FROM tbempleados WHERE tbempleados.FIAREAID = AREAS.FIAREAID AND tbempleados.FICARGOID = 3),'') AS FCNUMJEFEPATRIMONIO,
-                                                    IFNULL((SELECT FCEMPLEADO FROM tbempleados WHERE tbempleados.FIAREAID = AREAS.FIAREAID AND tbempleados.FICARGOID = 4),'') AS FCNUMSSINDICATURA,
-                                                    IFNULL((SELECT FCEMPLEADO FROM tbempleados WHERE tbempleados.FIAREAID = AREAS.FIAREAID AND tbempleados.FICARGOID = 5),'') AS FCNUMENLACE
+                                                    IFNULL((SELECT FCNOMBRE FROM tbempleados WHERE tbempleados.FIAREAID = AREAS.FIAREAID AND tbempleados.FICARGOID = 1 GROUP BY FIAREAID),'') AS FCCONTRALOR,
+                                                    IFNULL((SELECT FCNOMBRE FROM tbempleados WHERE tbempleados.FIAREAID = AREAS.FIAREAID AND tbempleados.FICARGOID = 2 GROUP BY FIAREAID),'') AS FCPATRIMONIO,
+                                                    IFNULL((SELECT FCNOMBRE FROM tbempleados WHERE tbempleados.FIAREAID = AREAS.FIAREAID AND tbempleados.FICARGOID = 3 GROUP BY FIAREAID),'') AS FCJEFEPATRIMONIO,
+                                                    IFNULL((SELECT FCNOMBRE FROM tbempleados WHERE tbempleados.FIAREAID = AREAS.FIAREAID AND tbempleados.FICARGOID = 4 GROUP BY FIAREAID),'') AS FCSSINDICATURA,
+                                                    IFNULL((SELECT FCNOMBRE FROM tbempleados WHERE tbempleados.FIAREAID = AREAS.FIAREAID AND tbempleados.FICARGOID = 5 GROUP BY FIAREAID),'') AS FCENLACE,
+                                                    IFNULL((SELECT FCEMPLEADO FROM tbempleados WHERE tbempleados.FIAREAID = AREAS.FIAREAID AND tbempleados.FICARGOID = 1 GROUP BY FIAREAID),'') AS FCNUMCONTRALOR,
+                                                    IFNULL((SELECT FCEMPLEADO FROM tbempleados WHERE tbempleados.FIAREAID = AREAS.FIAREAID AND tbempleados.FICARGOID = 2 GROUP BY FIAREAID),'') AS FCNUMPATRIMONIO,
+                                                    IFNULL((SELECT FCEMPLEADO FROM tbempleados WHERE tbempleados.FIAREAID = AREAS.FIAREAID AND tbempleados.FICARGOID = 3 GROUP BY FIAREAID),'') AS FCNUMJEFEPATRIMONIO,
+                                                    IFNULL((SELECT FCEMPLEADO FROM tbempleados WHERE tbempleados.FIAREAID = AREAS.FIAREAID AND tbempleados.FICARGOID = 4 GROUP BY FIAREAID),'') AS FCNUMSSINDICATURA,
+                                                    IFNULL((SELECT FCEMPLEADO FROM tbempleados WHERE tbempleados.FIAREAID = AREAS.FIAREAID AND tbempleados.FICARGOID = 5 GROUP BY FIAREAID),'') AS FCNUMENLACE
 
                                                     FROM tbactas 
                                                     INNER JOIN tbbienes AS BIENES ON (tbactas.FIACTAID = BIENES.FIACTAID) 
@@ -107,16 +107,16 @@ class ModelActas
         BIENES.FIBMPBAJOCOSTO,
         BIENES.FIBMFACTIVOFIJO,
         BIENES.FIBMFBAJOCOSTO,
-        IFNULL((SELECT FCNOMBRE FROM tbempleados WHERE tbempleados.FIAREAID = AREAS.FIAREAID AND tbempleados.FICARGOID = 1),'') AS FCCONTRALOR,
-        IFNULL((SELECT FCNOMBRE FROM tbempleados WHERE tbempleados.FIAREAID = AREAS.FIAREAID AND tbempleados.FICARGOID = 2),'') AS FCPATRIMONIO,
-        IFNULL((SELECT FCNOMBRE FROM tbempleados WHERE tbempleados.FIAREAID = AREAS.FIAREAID AND tbempleados.FICARGOID = 3),'') AS FCJEFEPATRIMONIO,
-        IFNULL((SELECT FCNOMBRE FROM tbempleados WHERE tbempleados.FIAREAID = AREAS.FIAREAID AND tbempleados.FICARGOID = 4),'') AS FCSSINDICATURA,
-        IFNULL((SELECT FCNOMBRE FROM tbempleados WHERE tbempleados.FIAREAID = AREAS.FIAREAID AND tbempleados.FICARGOID = 5),'') AS FCENLACE,
-         IFNULL((SELECT FCEMPLEADO FROM tbempleados WHERE tbempleados.FIAREAID = AREAS.FIAREAID AND tbempleados.FICARGOID = 1),'') AS FCNUMCONTRALOR,
-                                                    IFNULL((SELECT FCEMPLEADO FROM tbempleados WHERE tbempleados.FIAREAID = AREAS.FIAREAID AND tbempleados.FICARGOID = 2),'') AS FCNUMPATRIMONIO,
-                                                    IFNULL((SELECT FCEMPLEADO FROM tbempleados WHERE tbempleados.FIAREAID = AREAS.FIAREAID AND tbempleados.FICARGOID = 3),'') AS FCNUMJEFEPATRIMONIO,
-                                                    IFNULL((SELECT FCEMPLEADO FROM tbempleados WHERE tbempleados.FIAREAID = AREAS.FIAREAID AND tbempleados.FICARGOID = 4),'') AS FCNUMSSINDICATURA,
-                                                    IFNULL((SELECT FCEMPLEADO FROM tbempleados WHERE tbempleados.FIAREAID = AREAS.FIAREAID AND tbempleados.FICARGOID = 5),'') AS FCNUMENLACE
+        IFNULL((SELECT FCNOMBRE FROM tbempleados WHERE tbempleados.FIAREAID = AREAS.FIAREAID AND tbempleados.FICARGOID = 1 GROUP BY FIAREAID),'') AS FCCONTRALOR,
+        IFNULL((SELECT FCNOMBRE FROM tbempleados WHERE tbempleados.FIAREAID = AREAS.FIAREAID AND tbempleados.FICARGOID = 2 GROUP BY FIAREAID),'') AS FCPATRIMONIO,
+        IFNULL((SELECT FCNOMBRE FROM tbempleados WHERE tbempleados.FIAREAID = AREAS.FIAREAID AND tbempleados.FICARGOID = 3 GROUP BY FIAREAID),'') AS FCJEFEPATRIMONIO,
+        IFNULL((SELECT FCNOMBRE FROM tbempleados WHERE tbempleados.FIAREAID = AREAS.FIAREAID AND tbempleados.FICARGOID = 4 GROUP BY FIAREAID),'') AS FCSSINDICATURA,
+        IFNULL((SELECT FCNOMBRE FROM tbempleados WHERE tbempleados.FIAREAID = AREAS.FIAREAID AND tbempleados.FICARGOID = 5 GROUP BY FIAREAID),'') AS FCENLACE,
+         IFNULL((SELECT FCEMPLEADO FROM tbempleados WHERE tbempleados.FIAREAID = AREAS.FIAREAID AND tbempleados.FICARGOID = 1 GROUP BY FIAREAID),'') AS FCNUMCONTRALOR,
+                                                    IFNULL((SELECT FCEMPLEADO FROM tbempleados WHERE tbempleados.FIAREAID = AREAS.FIAREAID AND tbempleados.FICARGOID = 2 GROUP BY FIAREAID),'') AS FCNUMPATRIMONIO,
+                                                    IFNULL((SELECT FCEMPLEADO FROM tbempleados WHERE tbempleados.FIAREAID = AREAS.FIAREAID AND tbempleados.FICARGOID = 3 GROUP BY FIAREAID),'') AS FCNUMJEFEPATRIMONIO,
+                                                    IFNULL((SELECT FCEMPLEADO FROM tbempleados WHERE tbempleados.FIAREAID = AREAS.FIAREAID AND tbempleados.FICARGOID = 4 GROUP BY FIAREAID),'') AS FCNUMSSINDICATURA,
+                                                    IFNULL((SELECT FCEMPLEADO FROM tbempleados WHERE tbempleados.FIAREAID = AREAS.FIAREAID AND tbempleados.FICARGOID = 5 GROUP BY FIAREAID),'') AS FCNUMENLACE
 
         FROM tbactas 
         INNER JOIN tbbienes AS BIENES ON (tbactas.FIACTAID = BIENES.FIACTAID) 
