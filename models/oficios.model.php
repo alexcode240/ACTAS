@@ -8,7 +8,9 @@ class ModelOficios{
 
     static public function mdlCrearOficio($tabla, $datos)
     {
-        $stmt = Connection::connect()->prepare("INSERT INTO $tabla(FCOFICIO, FCFECHANOTIFICACION, FDFECHANOTIFICACION, FCFECHA, FDFECHA) VALUES (:FCOFICIO, :FCFECHANOTIFICACION, :FDFECHANOTIFICACION, :FCFECHA, :FDFECHA)");
+        $connect = Connection::connect();
+        
+        $stmt = $connect->prepare("INSERT INTO $tabla(FCOFICIO, FCFECHANOTIFICACION, FDFECHANOTIFICACION, FCFECHA, FDFECHA) VALUES (:FCOFICIO, :FCFECHANOTIFICACION, :FDFECHANOTIFICACION, :FCFECHA, :FDFECHA)");
 
         $stmt->bindParam(":FCOFICIO", $datos["FCOFICIO"], PDO::PARAM_STR);
         $stmt->bindParam(":FCFECHANOTIFICACION", $datos["FCFECHANOTIFICACION"], PDO::PARAM_STR);
@@ -18,8 +20,9 @@ class ModelOficios{
 
 
         if ($stmt->execute()) {
-
-            return "ok";
+           
+            return $connect->lastInsertId();
+            
         } else {
 
             return "error";
@@ -27,5 +30,8 @@ class ModelOficios{
 
         $stmt->close();
         $stmt = null;
+        
+        $connect->close();
+        $connect = null;
     }
 }

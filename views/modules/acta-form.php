@@ -45,8 +45,15 @@
                                             $areas = AreasController::ctrShowAreas($item, $valor);
 
                                             foreach ($areas as $key => $value) {
+                                                $numArea = "";
 
-                                                echo '<option value="' . $value["FIAREAID"] . '">' . $value["FCAREA"] . '</option>';
+                                                if(strlen($value["FINUMAREA"]) == 1){
+                                                    $numArea = "0".$value["FINUMAREA"];
+                                                } else {
+                                                    $numArea = $value["FINUMAREA"];
+                                                }
+
+                                                echo '<option value="' . $value["FIAREAID"] . '">' . $value["FCAREA"] . '-'.$numArea.' </option>';
                                             }
 
                                             ?>
@@ -113,7 +120,45 @@
                                     </div>
                                 </div>
 
-                                <a id="descargarWord" href="views/modules/descargar-word.php" style="display:none">Descargar Acta</a>
+                                <div class="form-group col-6">
+                                    <label>Bienes Muebles Presentados (Activo Fijo)</label>
+                                    <div class="input-group">
+                                        <input type="number" min="0" class="form-control folio" id="BMPActivoFijo" name="BMPActivoFijo">
+                                        <div class="input-group-append">
+                                            <div class="input-group-text"><i class="fa fa-hashtag"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-6">
+                                    <label>Bienes Muebles Presentados (Bajo Costo)</label>
+                                    <div class="input-group">
+                                        <input type="number" min="0" class="form-control folio" id="BMPBajoCosto" name="BMPBajoCosto">
+                                        <div class="input-group-append">
+                                            <div class="input-group-text"><i class="fa fa-hashtag"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-6">
+                                    <label>Bienes Muebles Faltantes (Activo Fijo)</label>
+                                    <div class="input-group">
+                                        <input type="number" min="0" class="form-control folio" id="BMFActivoFijo" name="BMFActivoFijo">
+                                        <div class="input-group-append">
+                                            <div class="input-group-text"><i class="fa fa-hashtag"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-6">
+                                    <label>Bienes Muebles Faltantes (Bajo Costo)</label>
+                                    <div class="input-group">
+                                        <input type="number" min="0" class="form-control folio" id="BMFBajoCosto" name="BMFBajoCosto">
+                                        <div class="input-group-append">
+                                            <div class="input-group-text"><i class="fa fa-hashtag"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <a id="descargarWord" href="" style="display:none">Descargar Acta</a>
                                 <button type="button" id="generarActa" class="btn btn-primary float-right">Generar Acta</button>
                                 <!-- Date -->
                                 <!--<div class="form-group">

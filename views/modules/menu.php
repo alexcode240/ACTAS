@@ -19,7 +19,7 @@
                      with font-awesome or any other icon font library -->
 
 
-                        <li class="nav-item">
+                        <!--<li class="nav-item">
                             <a href="inicio" class="nav-link <?php if ($request == "inicio") {
                                                                     echo "active";
                                                                 } ?>">
@@ -28,9 +28,9 @@
                                     Actas Circunstanciales
                                 </p>
                             </a>
-                        </li>
+                        </li>-->
                         <li class="nav-item">
-                            <a href="acta-form" class="nav-link <?php if ($request == "acta-form") {
+                            <a href="acta-form" class="nav-link <?php if ($request == "acta-form" || $request == "" || $request == "inicio") {
                                                                     echo "active";
                                                                 } ?>">
 

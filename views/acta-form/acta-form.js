@@ -1,7 +1,7 @@
 function Unidades(num) {
   switch (num) {
     case 1:
-      return "UNO";
+      return "UN";
     case 2:
       return "DOS";
     case 3:
@@ -419,7 +419,10 @@ $("#generarActa")
 
       //return;
     //}
-    let area = $(".selectorArea").val();
+    
+    let area = $(".selectorArea option:selected").html();
+    area = area.split('-')[1];
+    area = area.slice(0, -1);
     let fechaElaboracion = $(".fechaElaboracion").val();
     let folio = $(".folio").val();
     let fechaElaboracionOficio = $(".fechaElaboracionOficio").val();
@@ -444,12 +447,65 @@ $("#generarActa")
 
     let fdFechaNotificacionOficio = fechaNotificacionOficio;
 
+    let fcFechaInicioLevantamiento = fechaEnPalabras(
+      extraerNumerosFecha(fechaInicioLevantamiento, true),
+      true
+    );
+    fcFechaInicioLevantamiento = JSON.stringify(fcFechaInicioLevantamiento);
+
+    let fdFechaInicioLevantamiento = fechaInicioLevantamiento;
+
+    let fcFechaFinLevantamiento = fechaEnPalabras(
+      extraerNumerosFecha(fechaFinLevantamiento, true),
+      true
+    );
+    fcFechaFinLevantamiento = JSON.stringify(fcFechaFinLevantamiento);
+
+    let fdFechaFinLevantamiento = fechaFinLevantamiento;
+
+    let areaFolio = "";
+
+    if(area.toString().length == 1){
+      areaFolio = "0"+area;
+    }else{
+      areaFolio = area;
+    }
+
+    let folioActa = "LFBM/CIM/1RO/" + areaFolio + "/" + fechaElaboracion.substring(0, 4);
+    let areaId = $(".selectorArea").val();
+
+    let fcFechaElaboracion = fechaEnPalabras(
+      extraerNumerosFecha(fechaElaboracion, true),
+      true
+    );
+    
+    fcFechaElaboracion = JSON.stringify(fcFechaElaboracion);
+    let fdFechaElaboracion = fechaElaboracion;
+
+    let bmpActivoFijo = $("#BMPActivoFijo").val();
+    let bmpBajoCosto = $("#BMPBajoCosto").val();
+    let bmfActivoFijo = $("#BMFActivoFijo").val();
+    let bmfBajoCosto = $("#BMFBajoCosto").val();
+
+
     var datos = new FormData();
     datos.append("FCOFICIO", folio);
     datos.append("FCFECHANOTIFICACION", fcFechaNotificacionOficio);
     datos.append("FDFECHANOTIFICACION", fdFechaNotificacionOficio);
-    datos.append("FCFECHA", fcFechaElaboracionOficio);
-    datos.append("FDFECHA", fdFechaElaboracionOficio);
+    datos.append("FCFECHAOFICIO", fcFechaElaboracionOficio);
+    datos.append("FDFECHAOFICIO", fdFechaElaboracionOficio);
+    datos.append("FCFECHAINICIOLEVANTAMIENTO", fcFechaInicioLevantamiento);
+    datos.append("FDFECHAINICIOLEVANTAMIENTO", fdFechaInicioLevantamiento);
+    datos.append("FCFECHAFINLEVANTAMIENTO", fcFechaFinLevantamiento);
+    datos.append("FDFECHAFINLEVANTAMIENTO", fdFechaFinLevantamiento);
+    datos.append("FCFOLIOACTA", folioActa);
+    datos.append("FIAREAIDACTA", areaId);
+    datos.append("FCFECHAELABORACIONACTA", fcFechaElaboracion);
+    datos.append("FDFECHAELABORACIONACTA", fdFechaElaboracion);
+    datos.append("FIBMPACTIVOFIJO", bmpActivoFijo);
+    datos.append("FIBMPBAJOCOSTO", bmpBajoCosto);
+    datos.append("FIBMFACTIVOFIJO", bmfActivoFijo);
+    datos.append("FIBMFBAJOCOSTO", bmfBajoCosto);
     
     $.ajax({
       url: "ajax/generar-acta.ajax.php",
@@ -461,25 +517,29 @@ $("#generarActa")
       dataType: "json",
       success: function (respuesta) {
        if(respuesta){
-         swal({
-           type: "success",
+         $("#descargarWord").attr("href", "views/modules/descargar-word.php?actaId="+respuesta);
+         
+         window.open("views/modules/descargar-word.php?idActa="+respuesta);
+         //$("#descargarWord").click();
+         /*Swal.fire({
+           icon: "success",
            title: "¡El acta ha sido guardada correctamente!",
            showConfirmButton: true,
            confirmButtonText: "Cerrar",
          }).then(function (result) {
            if (result.value) {
-             window.location = "oficios";
+             window.location = "inicio";
            }
-         });
+         });*/
        }else{
-         swal({
-           type: "error",
+         Swal.fire({
+           icon: "error",
            title: "¡El acta no pudo ser guardada correctamente!",
            showConfirmButton: true,
            confirmButtonText: "Cerrar",
          }).then(function (result) {
            if (result.value) {
-             window.location = "oficios";
+             window.location = "inicio";
            }
          });
        }

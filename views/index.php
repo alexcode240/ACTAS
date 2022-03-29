@@ -72,19 +72,23 @@
         if (isset($_GET["ruta"])) {
 
             if (
-                $_GET["ruta"] == "inicio" ||
+                
                 $_GET["ruta"] == "acta-form" ||
                 $_GET["ruta"] == "logout"
             ) {
 
                 include "modules/" . $_GET["ruta"] . ".php";
-            } else {
+                
+            }else if($_GET["ruta"] == "inicio"){
+
+                include "modules/acta-form.php";
+            }else {
 
                 include "modules/404.php";
             }
         } else {
 
-            include "modules/inicio.php";
+            include "modules/acta-form.php";
         }
 
         include "modules/footer.php";
@@ -109,7 +113,7 @@
     <script src="views/plugins/moment/moment.min.js"></script>
 
     <!-- sweet alert -->
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script src="views/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
     <!-- AdminLTE App -->
