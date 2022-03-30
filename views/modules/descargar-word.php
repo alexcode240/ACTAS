@@ -88,7 +88,7 @@ class WordController
         $header->addWatermark(
         '../../views/img/acta.png', [
             'marginTop' => -40,
-            'marginLeft' => -70,
+            'marginLeft' => -50,
             'posHorizontal' => 'absolute',
             'posVertical' => 'absolute'
         ]);
