@@ -139,7 +139,7 @@ class WordController
         $section->addTextBreak();
 
 
-        $section->addText("Folio: " . $respuesta["FCFOLIO"], 'ptFont', 'ptStyle');
+        $section->addText("Folio: " . $respuesta["FCFOLIO"]."/01/03", 'ptFont', 'ptStyle');
 
         $hecho2 = "2.	En uso de la palabra el C. ".$respuesta["FCCONTRALOR"].", representante de la Contraloría Interna Municipal, le solicita al C. ".$respuesta["FCENLACE"]." , Enlace Administrativo del ".$respuesta["FCAREA"]." , designe a dos testigos de asistencia; a lo que manifiesta que tiene a bien nombrar a los (as) CC. ".$stringNombreTestigos.", quienes se identifican con credenciales de empleados números ".$stringNumEmpleadoTestigos." respectivamente, expedidas por el H. Ayuntamiento de Tlalnepantla de Baz, Estado de México, documentos en los que aparecen sus fotografías, nombres y firmas, los cuales se tuvieron a la vista, se examinaron y se devolvieron de conformidad a sus portadores por ser de uso oficial, luego de obtener copias simples, mismas que se anexan en la presente Acta Circunstanciada.";
 
@@ -224,7 +224,7 @@ class WordController
         
         $section->addTextBreak();
 
-        $section->addText("Folio: " . $respuesta["FCFOLIO"], 'ptFont', 'ptStyle');
+        $section->addText("Folio: " . $respuesta["FCFOLIO"]."/02/03", 'ptFont', 'ptStyle');
 
         $textoFinal1 = "En ese contexto, los bienes muebles faltantes se detallan en el “ANEXO B” y los sobrantes en el “ANEXO C” de la presente Acta Circunstanciada.";
 
@@ -299,7 +299,7 @@ class WordController
         $section->addText($stringTestigos, 'fFirma', 'pFirma');
 
         $section->addTextBreak();
-        $section->addText("Folio: " . $respuesta["FCFOLIO"], 'ptFont', 'ptStyle');
+        $section->addText("Folio: " . $respuesta["FCFOLIO"]."/03/03", 'ptFont', 'ptStyle');
         
         $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
 
