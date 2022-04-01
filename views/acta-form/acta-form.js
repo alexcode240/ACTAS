@@ -53,12 +53,26 @@ function Decenas(num) {
           let uni = "";
           if(unidad == 2){
             uni = "DÓS";
+          }else if(unidad == 3){
+            uni = "TRÉS";
+          }else if(unidad == 6){
+            uni = "SÉIS";
           }else{
             uni = Unidades(unidad);
           }
           return "VEINTI" + uni;
       }
     case 3:
+      let uni = "";
+      if (unidad == 2) {
+        uni = "DÓS";
+      } else if (unidad == 3) {
+        uni = "TRÉS";
+      } else if (unidad == 6) {
+        uni = "SÉIS";
+      } else {
+        uni = Unidades(unidad);
+      }
       return DecenasY("TREINTA", unidad);
     case 4:
       return DecenasY("CUARENTA", unidad);
@@ -78,7 +92,20 @@ function Decenas(num) {
 } //Unidades()
 
 function DecenasY(strSin, numUnidades) {
-  if (numUnidades > 0) return strSin + " Y " + Unidades(numUnidades);
+  
+  let uni = "";
+
+  if (numUnidades == 2) {
+    uni = "DÓS";
+  } else if (numUnidades == 3) {
+    uni = "TRÉS";
+  } else if (numUnidades == 6) {
+    uni = "SÉIS";
+  } else {
+    uni = Unidades(numUnidades);
+  }
+
+  if (numUnidades > 0) return strSin + " Y " + uni;
 
   return strSin;
 } //DecenasY()
@@ -261,7 +288,7 @@ let fechaEnPalabras = (fecha, tiempo)=>{
       if(dia == "UN  "){
 
         dia = "UNO  ";
-
+        
       }
       dia = dia.slice(0, -2);
 
