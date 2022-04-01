@@ -50,7 +50,13 @@ function Decenas(num) {
         case 0:
           return "VEINTE";
         default:
-          return "VEINTI" + Unidades(unidad);
+          let uni = "";
+          if(unidad == 2){
+            uni = "DÓS";
+          }else{
+            uni = Unidades(unidad);
+          }
+          return "VEINTI" + uni;
       }
     case 3:
       return DecenasY("TREINTA", unidad);
@@ -250,6 +256,13 @@ let fechaEnPalabras = (fecha, tiempo)=>{
 
     if(fecha.dia != ""){
       let dia = NumeroALetras(fecha.dia);
+      dia = dia.slice(0, -2);
+
+      if(dia == "UN"){
+
+        dia = "UNO";
+
+      }
 
       let mes = "";
 
@@ -280,8 +293,10 @@ let fechaEnPalabras = (fecha, tiempo)=>{
       }
 
       let anio = NumeroALetras(fecha.anio);
+      anio = anio.slice(0, -2);
       let hora = NumeroALetras(fecha.hora);
       let minutos = NumeroALetras(fecha.minutos);
+      minutos = minutos.slice(0, -2);
 
       if(tiempo){
 
@@ -312,7 +327,9 @@ let fechaEnPalabras = (fecha, tiempo)=>{
 
 }
 
-console.log(fechaEnPalabras(extraerNumerosFecha('2022-03-01', false) , false));
+console.log(
+  fechaEnPalabras(extraerNumerosFecha("2022-03-01 12:35", true), true)
+);
 
 $(".selectorArea").select2();
 
