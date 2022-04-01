@@ -256,13 +256,14 @@ let fechaEnPalabras = (fecha, tiempo)=>{
 
     if(fecha.dia != ""){
       let dia = NumeroALetras(fecha.dia);
-      dia = dia.slice(0, -1);
+      
 
-      if(dia == "UN "){
+      if(dia == "UN  "){
 
-        dia = "UNO";
+        dia = "UNO  ";
 
       }
+      dia = dia.slice(0, -2);
 
       let mes = "";
 
@@ -297,7 +298,7 @@ let fechaEnPalabras = (fecha, tiempo)=>{
       let hora = NumeroALetras(fecha.hora);
       hora = hora.slice(0, -2);
       let minutos = NumeroALetras(fecha.minutos);
-      minutos = minutos.slice(0, -1);
+      minutos = minutos.slice(0, -2);
 
       if(tiempo){
 
