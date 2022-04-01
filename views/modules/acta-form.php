@@ -47,13 +47,13 @@
                                             foreach ($areas as $key => $value) {
                                                 $numArea = "";
 
-                                                if(strlen($value["FINUMAREA"]) == 1){
-                                                    $numArea = "0".$value["FINUMAREA"];
+                                                if (strlen($value["FINUMAREA"]) == 1) {
+                                                    $numArea = "0" . $value["FINUMAREA"];
                                                 } else {
                                                     $numArea = $value["FINUMAREA"];
                                                 }
 
-                                                echo '<option value="' . $value["FIAREAID"] . '">' . $value["FCAREA"] . '-'.$numArea.' </option>';
+                                                echo '<option value="' . $value["FIAREAID"] . '">' . $value["FCAREA"] . '-' . $numArea . ' </option>';
                                             }
 
                                             ?>
@@ -70,6 +70,17 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="form-group col-6">
+                                    <label>Fecha Fin de elaboración del Acta</label>
+                                    <div class="input-group date" id="fechaFinElaboracion" data-target-input="nearest">
+                                        <input type="text" class="form-control datetimepicker-input fechaFinElaboracion" name="fechaFinElaboracion" data-target="#fechaFinElaboracion" />
+                                        <div class="input-group-append" data-target="#fechaFinElaboracion" data-toggle="datetimepicker">
+                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="form-group col-6">
                                     <label>Número de oficio</label>
                                     <div class="input-group">

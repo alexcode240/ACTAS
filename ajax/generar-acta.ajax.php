@@ -19,6 +19,8 @@ class AjaxCrearActa {
     public $fiAreaIdActa;
     public $fcFechaElaboracionActa;
     public $fdFechaElaboracionActa;
+    public $fcFechaFinElaboracionActa;
+    public $fdFechaFinElaboracionActa;
     public $bmpActivoFijo;
     public $bmpBajoCosto;
     public $bmfActivoFijo;
@@ -59,6 +61,8 @@ class AjaxCrearActa {
                     "FCFOLIO" => $this -> fcFolioActa,
                     "FIAREAID" => $this -> fiAreaIdActa,
                     "FIOFICIOID" => $oficioId,
+                    "FCFECHAFIN" => $this -> fcFechaFinElaboracionActa,
+                    "FDFECHAFIN" => $this -> fdFechaFinElaboracionActa,
                     "FCFECHA" => $this -> fcFechaElaboracionActa,
                     "FDFECHA" => $this -> fdFechaElaboracionActa
                 );
@@ -115,6 +119,8 @@ if(isset($_POST['FCOFICIO'])){
     $crearActa -> fiAreaIdActa = $_POST['FIAREAIDACTA'];
     $crearActa -> fcFechaElaboracionActa = $_POST['FCFECHAELABORACIONACTA'];
     $crearActa -> fdFechaElaboracionActa = $_POST['FDFECHAELABORACIONACTA'];
+    $crearActa -> fcFechaFinElaboracionActa = $_POST['FCFECHAFINELABORACIONACTA'];
+    $crearActa -> fdFechaFinElaboracionActa = $_POST['FDFECHAFINELABORACIONACTA'];
     $crearActa -> bmpActivoFijo = $_POST['FIBMPACTIVOFIJO'];
     $crearActa -> bmpBajoCosto = $_POST['FIBMPBAJOCOSTO'];
     $crearActa -> bmfActivoFijo = $_POST['FIBMFACTIVOFIJO'];

@@ -324,6 +324,13 @@ $(".selectorArea").select2();
    },
  });
 
+  $("#fechaFinElaboracion").datetimepicker({
+    format: "YYYY-MM-DD HH:mm",
+    icons: {
+      time: "far fa-clock",
+    },
+  });
+
 $("#fechaElaboracionOficio").datetimepicker({
   format: "YYYY-MM-DD",
   icons: {
@@ -424,6 +431,7 @@ $("#generarActa")
     area = area.split('-')[1];
     area = area.slice(0, -1);
     let fechaElaboracion = $(".fechaElaboracion").val();
+    let fechaFinElaboracion = $(".fechaFinElaboracion").val();
     let folio = $(".folio").val();
     let fechaElaboracionOficio = $(".fechaElaboracionOficio").val();
     let fechaNotificacionOficio = $(".fechaNotificacionOficio").val();
@@ -482,6 +490,15 @@ $("#generarActa")
     fcFechaElaboracion = JSON.stringify(fcFechaElaboracion);
     let fdFechaElaboracion = fechaElaboracion;
 
+
+    let fcFechaFinElaboracion = fechaEnPalabras(
+      extraerNumerosFecha(fechaFinElaboracion, true),
+      true
+    );
+
+    fcFechaFinElaboracion = JSON.stringify(fcFechaFinElaboracion);
+    let fdFechaFinElaboracion = fechaFinElaboracion;
+
     let bmpActivoFijo = $("#BMPActivoFijo").val();
     let bmpBajoCosto = $("#BMPBajoCosto").val();
     let bmfActivoFijo = $("#BMFActivoFijo").val();
@@ -502,6 +519,8 @@ $("#generarActa")
     datos.append("FIAREAIDACTA", areaId);
     datos.append("FCFECHAELABORACIONACTA", fcFechaElaboracion);
     datos.append("FDFECHAELABORACIONACTA", fdFechaElaboracion);
+    datos.append("FCFECHAFINELABORACIONACTA", fcFechaFinElaboracion);
+    datos.append("FDFECHAFINELABORACIONACTA", fdFechaFinElaboracion);
     datos.append("FIBMPACTIVOFIJO", bmpActivoFijo);
     datos.append("FIBMPBAJOCOSTO", bmpBajoCosto);
     datos.append("FIBMFACTIVOFIJO", bmfActivoFijo);

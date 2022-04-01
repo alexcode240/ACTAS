@@ -11,11 +11,13 @@ class ModelActas
     {
         $connect = Connection::connect();
 
-        $stmt = $connect->prepare("INSERT INTO $tabla(FCFOLIO, FIAREAID, FIOFICIOID, FCFECHA, FDFECHA) VALUES (:FCFOLIO, :FIAREAID, :FIOFICIOID, :FCFECHA, :FDFECHA)");
+        $stmt = $connect->prepare("INSERT INTO $tabla(FCFOLIO, FIAREAID, FIOFICIOID, FCFECHAFIN, FDFECHAFIN, FCFECHA, FDFECHA) VALUES (:FCFOLIO, :FIAREAID, :FIOFICIOID, :FCFECHAFIN, :FDFECHAFIN, :FCFECHA, :FDFECHA)");
 
         $stmt->bindParam(":FCFOLIO", $datos["FCFOLIO"], PDO::PARAM_STR);
         $stmt->bindParam(":FIAREAID", $datos["FIAREAID"], PDO::PARAM_INT);
         $stmt->bindParam(":FIOFICIOID", $datos["FIOFICIOID"], PDO::PARAM_INT);
+        $stmt->bindParam(":FCFECHAFIN", $datos["FCFECHAFIN"], PDO::PARAM_STR);
+        $stmt->bindParam(":FDFECHAFIN", $datos["FDFECHAFIN"], PDO::PARAM_STR);
         $stmt->bindParam(":FCFECHA", $datos["FCFECHA"], PDO::PARAM_STR);
         $stmt->bindParam(":FDFECHA", $datos["FDFECHA"], PDO::PARAM_STR);
 
@@ -44,6 +46,8 @@ class ModelActas
         if ($item != null) {
 
             $stmt = Connection::connect()->prepare("SELECT tbactas.FCFOLIO, 
+                                                    tbactas.FCFECHAFIN AS FCFECHAFINACTA,
+                                                    tbactas.FDFECHAFIN AS FDFECHAFINACTA,
                                                     tbactas.FCFECHA AS FCFECHAACTA, 
                                                     tbactas.FDFECHA AS FDFECHAACTA, 
                                                     AREAS.FCAREA, 
