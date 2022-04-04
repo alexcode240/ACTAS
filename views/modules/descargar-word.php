@@ -117,7 +117,7 @@ class WordController
 
         $fechaFinElaboracion = json_decode($respuesta["FCFECHAFINACTA"], true);
 
-        $section->addText('En el Municipio de Tlalnepantla de Baz, Estado de México, siendo las '.$fechaElaboracion["hora"].' horas con ' . $fechaElaboracion["minutos"] .' minutos, del día ' . $fechaElaboracion["dia"] .' de ' . $fechaElaboracion["mes"] .' de ' . $fechaElaboracion["anio"] . ', el C. '.$respuesta["FCCONTRALOR"].', servidor público adscrito al Departamento de Auditoría Operacional, Administrativa y Legal, dependiente de la Subcontraloría de Fiscalización de la Contraloría Interna Municipal, quien actúa con fundamento en lo dispuesto en los artículos 174, 175, 176 fracción III, 177 fracciones I y XII, 178, 179 fracciones I, II, III, IV, IX y XII, 193 fracción I, 194 fracciones V y VI, 195 fracciones I, III, IV, VI y X y 196 del Reglamento Interno de la Administración Pública Municipal de Tlalnepantla de Baz, Estado de México, publicado en la Gaceta Municipal No. 10, de fecha 22 de febrero de 2022 con la presencia de los (as) CC. '.$respuesta["FCPATRIMONIO"].' y '.$respuesta["FCJEFEPATRIMONIO"].', de la Subdirección de Patrimonio Municipal adscrita a la Secretaría del Ayuntamiento; '.$respuesta["FCSSINDICATURA"].', representante de la Segunda Sindicatura; y '.$respuesta["FCENLACE"].', Enlace Administrativo del '.$respuesta["FCAREA"].', mismos que se identifican con credenciales de empleados números '.$respuesta["FCNUMCONTRALOR"].', '.$respuesta["FCNUMPATRIMONIO"].', '.$respuesta["FCNUMJEFEPATRIMONIO"].', '.$respuesta["FCNUMSSINDICATURA"].' y '.$respuesta["FCNUMENLACE"].' respectivamente, expedidas por el H. Ayuntamiento de Tlalnepantla de Baz, Estado de México, documentos en los que aparecen sus fotografías, nombres y firmas, los cuales se tuvieron a la vista, se examinaron y se devolvieron de conformidad a sus portadores por ser de uso oficial, luego de obtener copias simples, mismas que se anexan a la presente; se encuentran constituidos en '.$respuesta["FCDIRECCION"].', domicilio que ocupa el '.$respuesta["FCAREA"].', con el objeto de levantar la presente Acta Circunstanciada, en la que se hacen constar los siguientes:','pFont','pStyle');
+        $section->addText('En el Municipio de Tlalnepantla de Baz, Estado de México, siendo las '.$fechaElaboracion["hora"].' horas con ' . $fechaElaboracion["minutos"] .' minutos, del día ' . $fechaElaboracion["dia"] .' de ' . $fechaElaboracion["mes"] .' de ' . $fechaElaboracion["anio"] . ', el C. '.$respuesta["FCCONTRALOR"].', servidor público adscrito al Departamento de Auditoría Operacional, Administrativa y Legal, dependiente de la Subcontraloría de Fiscalización de la Contraloría Interna Municipal, quien actúa con fundamento en lo dispuesto en los artículos 174, 175, 176 fracción III, 177 fracciones I y XII, 178, 179 fracciones I, II, III, IV, IX y XII, 193 fracción I, 194 fracciones V y VI, 195 fracciones I, III, IV, VI y X y 196 del Reglamento Interno de la Administración Pública Municipal de Tlalnepantla de Baz, Estado de México, publicado en la Gaceta Municipal No. 10, de fecha 22 de febrero de 2022 con la presencia de los (as) CC. '.$respuesta["FCPATRIMONIO"].' y '.$respuesta["FCJEFEPATRIMONIO"].', de la Subdirección de Patrimonio Municipal adscrita a la Secretaría del Ayuntamiento; '.$respuesta["FCSSINDICATURA"].', representante de la Segunda Sindicatura; y '.$respuesta["FCENLACE"].', Enlace Administrativo del '.$respuesta["FCAREA"].', mismos que se identifican con credencial para votar con números de FOLIO '.$respuesta["FCNUMCONTRALOR"].', '.$respuesta["FCNUMPATRIMONIO"].', '.$respuesta["FCNUMJEFEPATRIMONIO"].', '.$respuesta["FCNUMSSINDICATURA"].' y '.$respuesta["FCNUMENLACE"].' respectivamente, expedidas por el Instituto Nacional Electoral, Estado de México, documentos en los que aparecen sus fotografías, nombres y firmas, los cuales se tuvieron a la vista, se examinaron y se devolvieron de conformidad a sus portadores por ser de uso oficial, luego de obtener copias simples, mismas que se anexan a la presente; se encuentran constituidos en '.$respuesta["FCDIRECCION"].', domicilio que ocupa el '.$respuesta["FCAREA"].', con el objeto de levantar la presente Acta Circunstanciada, en la que se hacen constar los siguientes:','pFont','pStyle');
         
         $section->addTextBreak();
 
@@ -138,12 +138,12 @@ class WordController
         
         $section->addTextBreak();
         $section->addTextBreak();
-        $section->addTextBreak();
-
-
+        
         $section->addText("Folio: " . $respuesta["FCFOLIO"]."/01/04", 'ptFont', 'ptStyle');
 
-        $hecho2 = "2.	En uso de la palabra el C. ".$respuesta["FCCONTRALOR"].", representante de la Contraloría Interna Municipal, le solicita al C. ".$respuesta["FCENLACE"]." , Enlace Administrativo del ".$respuesta["FCAREA"]." , designe a dos testigos de asistencia; a lo que manifiesta que tiene a bien nombrar a los (as) CC. ".$stringNombreTestigos.", quienes se identifican con credenciales de empleados números ".$stringNumEmpleadoTestigos." respectivamente, expedidas por el H. Ayuntamiento de Tlalnepantla de Baz, Estado de México, documentos en los que aparecen sus fotografías, nombres y firmas, los cuales se tuvieron a la vista, se examinaron y se devolvieron de conformidad a sus portadores por ser de uso oficial, luego de obtener copias simples, mismas que se anexan en la presente Acta Circunstanciada.";
+        $section->addTextBreak();
+        
+        $hecho2 = "2.	En uso de la palabra el C. ".$respuesta["FCCONTRALOR"].", representante de la Contraloría Interna Municipal, le solicita al C. ".$respuesta["FCENLACE"].", Enlace Administrativo del ".$respuesta["FCAREA"].", designe a dos testigos de asistencia; a lo que manifiesta que tiene a bien nombrar a los (as) CC. ".$stringNombreTestigos.", quienes se identifican con credenciales de empleados números ".$stringNumEmpleadoTestigos." respectivamente, expedidas por el H. Ayuntamiento de Tlalnepantla de Baz, Estado de México, documentos en los que aparecen sus fotografías, nombres y firmas, los cuales se tuvieron a la vista, se examinaron y se devolvieron de conformidad a sus portadores por ser de uso oficial, luego de obtener copias simples, mismas que se anexan en la presente Acta Circunstanciada.";
 
         $section->addText(htmlspecialchars($hecho2, ENT_COMPAT, 'UTF-8') , 'pFont', 'pStyle');
 
@@ -225,8 +225,14 @@ class WordController
         $table2->addCell(334, $styleCell)->addText(htmlspecialchars($bmfBajoCosto), $cellFontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
         
         $section->addTextBreak();
+        $section->addTextBreak();
+        $section->addTextBreak();
+        $section->addTextBreak();
 
         $section->addText("Folio: " . $respuesta["FCFOLIO"]."/02/04", 'ptFont', 'ptStyle');
+
+        $section->addTextBreak();
+        $section->addTextBreak();
 
         $textoFinal1 = "En ese contexto, los bienes muebles faltantes se detallan en el “ANEXO B” y los sobrantes en el “ANEXO C” de la presente Acta Circunstanciada.";
 
@@ -263,6 +269,9 @@ class WordController
 
         $section->addTextBreak();
         $section->addTextBreak();
+        $section->addTextBreak();
+        $section->addTextBreak();
+       
         $section->addText("Folio: " . $respuesta["FCFOLIO"] . "/03/04", 'ptFont', 'ptStyle');
 
         $section->addTextBreak();
@@ -305,6 +314,15 @@ class WordController
         $section->addText($stringTestigos, 'fFirma', 'pFirma');
 
         $section->addTextBreak();
+        $section->addTextBreak();
+        $section->addTextBreak();
+        $section->addTextBreak();
+        $section->addTextBreak();
+        $section->addTextBreak();
+        $section->addTextBreak();
+        $section->addTextBreak();
+        $section->addTextBreak();
+
         $section->addText("Folio: " . $respuesta["FCFOLIO"]."/04/04", 'ptFont', 'ptStyle');
         
         $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
