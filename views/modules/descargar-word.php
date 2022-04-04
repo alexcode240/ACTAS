@@ -137,15 +137,15 @@ class WordController
         $section->addText(htmlspecialchars($hecho1, ENT_COMPAT, 'UTF-8') , 'pFont', 'pStyle');
         
         $section->addTextBreak();
-        $section->addTextBreak();
         
         $section->addText("Folio: " . $respuesta["FCFOLIO"]."/01/04", 'ptFont', 'ptStyle');
 
         $section->addTextBreak();
         
-        $hecho2 = "2.	En uso de la palabra el C. ".$respuesta["FCCONTRALOR"].", representante de la Contraloría Interna Municipal, le solicita al C. ".$respuesta["FCENLACE"].", Enlace Administrativo del ".$respuesta["FCAREA"].", designe a dos testigos de asistencia; a lo que manifiesta que tiene a bien nombrar a los (as) CC. ".$stringNombreTestigos.", quienes se identifican con credenciales de empleados números ".$stringNumEmpleadoTestigos." respectivamente, expedidas por el H. Ayuntamiento de Tlalnepantla de Baz, Estado de México, documentos en los que aparecen sus fotografías, nombres y firmas, los cuales se tuvieron a la vista, se examinaron y se devolvieron de conformidad a sus portadores por ser de uso oficial, luego de obtener copias simples, mismas que se anexan en la presente Acta Circunstanciada.";
-
-        $section->addText(htmlspecialchars($hecho2, ENT_COMPAT, 'UTF-8') , 'pFont', 'pStyle');
+       // $hecho2 = "2.	En uso de la palabra el C. ".$respuesta["FCCONTRALOR"].", representante de la Contraloría Interna Municipal, le solicita al C. ".$respuesta["FCENLACE"].", Enlace Administrativo del ".$respuesta["FCAREA"].", designe a dos testigos de asistencia; a lo que manifiesta que tiene a bien nombrar a los (as) CC. ".$stringNombreTestigos.", quienes se identifican con credencial para votar con números de FOLIO ".$stringNumEmpleadoTestigos." respectivamente, expedidas por el Instituto Nacional Electoral, Estado de México, documentos en los que aparecen sus fotografías, nombres y firmas, los cuales se tuvieron a la vista, se examinaron y se devolvieron de conformidad a sus portadores por ser de uso oficial, luego de obtener copias simples, mismas que se anexan en la presente Acta Circunstanciada.";
+       $hecho2 = "2.	En uso de la palabra el C. ".$respuesta["FCCONTRALOR"].", representante de la Contraloría Interna Municipal, le solicita al C. ".$respuesta["FCENLACE"].", Enlace Administrativo del ".$respuesta["FCAREA"].", designe a dos testigos de asistencia; a lo que manifiesta que tiene a bien nombrar a los (as) CC. INGRESE NOMBRES DE LOS TESTIGOS, quienes se identifican con credencial para votar con números de FOLIO INGRESE NUMEROS DE FOLIO DE LOS TESTIGOS respectivamente, expedidas por el Instituto Nacional Electoral, Estado de México, documentos en los que aparecen sus fotografías, nombres y firmas, los cuales se tuvieron a la vista, se examinaron y se devolvieron de conformidad a sus portadores por ser de uso oficial, luego de obtener copias simples, mismas que se anexan en la presente Acta Circunstanciada.";
+       
+       $section->addText(htmlspecialchars($hecho2, ENT_COMPAT, 'UTF-8') , 'pFont', 'pStyle');
 
         $hecho3 = "3.	En uso de la palabra la C. ".$respuesta["FCPATRIMONIO"].", representante de la Subdirección de Patrimonio Municipal, señala: en el Primer Levantamiento Físico de Bienes Muebles, personal de la Subdirección de Patrimonio Municipal acudió al espacio físico, el ".$fechaLevantamiento["dia"]." de ".$fechaLevantamiento["mes"]." de ".$fechaLevantamiento["anio"].", donde se encuentran los bienes muebles en uso y custodia del ".$respuesta["FCAREA"] .", para verificar la existencia física y datos de identificación de los mismos, con la participación del personal habilitado de la Segunda Sindicatura y de la Contraloría Interna Municipal, así como el C. ".$respuesta["FCENLACE"].", Enlace Administrativo del ".$respuesta["FCAREA"].", situación que se acredita con la (s) Bitácora (s) de Trabajo emitidas por el representante del Órgano Interno de Control, anexa (s) en la presente Acta Circunstanciada.";
 
@@ -226,12 +226,9 @@ class WordController
         
         $section->addTextBreak();
         $section->addTextBreak();
-        $section->addTextBreak();
-        $section->addTextBreak();
 
         $section->addText("Folio: " . $respuesta["FCFOLIO"]."/02/04", 'ptFont', 'ptStyle');
 
-        $section->addTextBreak();
         $section->addTextBreak();
 
         $textoFinal1 = "En ese contexto, los bienes muebles faltantes se detallan en el “ANEXO B” y los sobrantes en el “ANEXO C” de la presente Acta Circunstanciada.";
@@ -310,10 +307,12 @@ class WordController
         $section->addTextBreak();
         $section->addTextBreak();
 
-        $section->addText("_______________________________                                     _______________________________", 'fFirma', 'pFirma');
-        $section->addText($stringTestigos, 'fFirma', 'pFirma');
+        //$section->addText("_______________________________                                     _______________________________", 'fFirma', 'pFirma');
+       // $section->addText($stringTestigos, 'fFirma', 'pFirma');
 
-        $section->addTextBreak();
+        $section->addText("_______________________________                                     _______________________________", 'fFirma', 'pFirma');
+        $section->addText("C. Escriba el nombre del testigo                                                                  C. Escriba el nombre del testigo", 'fFirma', 'pFirma');
+
         $section->addTextBreak();
         $section->addTextBreak();
         $section->addTextBreak();
