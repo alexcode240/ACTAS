@@ -3,15 +3,15 @@ function Unidades(num) {
     case 1:
       return "UN";
     case 2:
-      return "DOS";
+      return "DÓS";
     case 3:
-      return "TRES";
+      return "TRÉS";
     case 4:
       return "CUATRO";
     case 5:
       return "CINCO";
     case 6:
-      return "SEIS";
+      return "SÉIS";
     case 7:
       return "SIETE";
     case 8:
