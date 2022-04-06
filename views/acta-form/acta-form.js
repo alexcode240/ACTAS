@@ -361,6 +361,7 @@ console.log(
 );
 
 $(".selectorArea").select2();
+$(".selectorSindicatura").select2();
 
 
  $("#fechaElaboracion").datetimepicker({
@@ -450,6 +451,13 @@ let validarDatos = () => {
     $("#area > span > span.selection > span").removeClass("has-error");
   }
 
+  if ($(".selectorSindicatura").val() == "") {
+    validacion = false;
+    $("#sindicatura > span > span.selection > span").addClass("has-error");
+  }else{
+    $("#sindicatura > span > span.selection > span").removeClass("has-error");
+  }
+
 
   if($(".folio").val() == ""){
     validacion = false;
@@ -476,6 +484,8 @@ $("#generarActa")
     let area = $(".selectorArea option:selected").html();
     area = area.split('-')[1];
     area = area.slice(0, -1);
+
+    let sindicaturaId = $(".selectorSindicatura").val();
     let fechaElaboracion = $(".fechaElaboracion").val();
     let fechaFinElaboracion = $(".fechaFinElaboracion").val();
     let folio = $(".folio").val();
@@ -582,9 +592,16 @@ $("#generarActa")
       dataType: "json",
       success: function (respuesta) {
        if(respuesta){
-         $("#descargarWord").attr("href", "views/modules/descargar-word.php?actaId="+respuesta);
+         $("#descargarWord").attr(
+           "href",
+           "views/modules/descargar-word.php?actaId=" +
+             respuesta +
+             "&sindicaturaId=" +
+             sindicaturaId
+         );
          
-         window.open("views/modules/descargar-word.php?idActa="+respuesta);
+         window.open("views/modules/descargar-word.php?idActa="+respuesta+"&sindicaturaId=" +
+             sindicaturaId);
          //$("#descargarWord").click();
          /*Swal.fire({
            icon: "success",

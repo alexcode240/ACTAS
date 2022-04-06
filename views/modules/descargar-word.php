@@ -4,12 +4,15 @@ require_once "../../controllers/actas.controller.php";
 require_once "../../models/actas.model.php";
 require_once "../../controllers/testigos.controller.php";
 require_once "../../models/testigos.model.php";
+require_once "../../controllers/users.controller.php";
+require_once "../../models/users.model.php";
 
 use PhpOffice\PhpWord\Style\Paper;
 
 class WordController
 {
     public $idActa;
+    public $sindicaturaId;
 
     public function ctrGenerateWord()
     {
@@ -20,6 +23,10 @@ class WordController
         $testigos = new TestigosController();
         $item = "FIACTAID";
         $respuestaTestigos = $testigos->ctrShowTestigos($item, $this->idActa);
+
+        $users = new UsersController();
+        $item = "FIEMPLEADOID";
+        $sindicatura = $users->ctrShowUsers($item, $this->sindicaturaId);
 
         $stringNombreTestigos = "";
         $stringNumEmpleadoTestigos = "";
@@ -117,7 +124,7 @@ class WordController
 
         $fechaFinElaboracion = json_decode($respuesta["FCFECHAFINACTA"], true);
 
-        $section->addText('En el Municipio de Tlalnepantla de Baz, Estado de México, siendo las '.$fechaElaboracion["hora"].' horas con ' . $fechaElaboracion["minutos"] .' minutos, del día ' . $fechaElaboracion["dia"] .' de ' . $fechaElaboracion["mes"] .' de ' . $fechaElaboracion["anio"] . ', él (la) C. '.$respuesta["FCCONTRALOR"].', servidor público adscrito al Departamento de Auditoría Operacional, Administrativa y Legal, dependiente de la Subcontraloría de Fiscalización de la Contraloría Interna Municipal, quien actúa con fundamento en lo dispuesto en los artículos 174, 175, 176 fracción III, 177 fracciones I y XII, 178, 179 fracciones I, II, III, IV, IX y XII, 193 fracción I, 194 fracciones V y VI, 195 fracciones I, III, IV, VI y X y 196 del Reglamento Interno de la Administración Pública Municipal de Tlalnepantla de Baz, Estado de México, publicado en la Gaceta Municipal No. 10, de fecha 22 de febrero de 2022 con la presencia de los (as) CC. '.$respuesta["FCPATRIMONIO"].' y '.$respuesta["FCJEFEPATRIMONIO"].', de la Subdirección de Patrimonio Municipal dependiente de la Secretaría del Ayuntamiento; '.$respuesta["FCSSINDICATURA"].', y Elsa Patricia Maldonado Benítez, representantes de la Segunda Sindicatura; y '.$respuesta["FCENLACE"].', Enlace Administrativo de la (del) '.$respuesta["FCAREA"].', mismos que se identifican con credencial para votar con números de folio '.$respuesta["FCNUMCONTRALOR"].', '.$respuesta["FCNUMPATRIMONIO"].', '.$respuesta["FCNUMJEFEPATRIMONIO"].', '.$respuesta["FCNUMSSINDICATURA"].' ,3213013148358 y '.$respuesta["FCNUMENLACE"].' respectivamente, expedidas por el Instituto Nacional Electoral, documentos en los que aparecen sus fotografías, nombres y firmas, los cuales se tuvieron a la vista, se examinaron y se devolvieron de conformidad a sus portadores por ser de uso oficial, luego de obtener copias simples, mismas que se anexan a la presente; se encuentran constituidos en '.$respuesta["FCDIRECCION"].', domicilio que ocupa la (el) '.$respuesta["FCAREA"].', con el objeto de levantar la presente Acta Circunstanciada, en la que se hacen constar los siguientes:','pFont','pStyle');
+        $section->addText('En el Municipio de Tlalnepantla de Baz, Estado de México, siendo las '.$fechaElaboracion["hora"].' horas con ' . $fechaElaboracion["minutos"] .' minutos, del día ' . $fechaElaboracion["dia"] .' de ' . $fechaElaboracion["mes"] .' de ' . $fechaElaboracion["anio"] . ', él (la) C. '.$respuesta["FCCONTRALOR"].', servidor público adscrito al Departamento de Auditoría Operacional, Administrativa y Legal, dependiente de la Subcontraloría de Fiscalización de la Contraloría Interna Municipal, quien actúa con fundamento en lo dispuesto en los artículos 174, 175, 176 fracción III, 177 fracciones I y XII, 178, 179 fracciones I, II, III, IV, IX y XII, 193 fracción I, 194 fracciones V y VI, 195 fracciones I, III, IV, VI y X y 196 del Reglamento Interno de la Administración Pública Municipal de Tlalnepantla de Baz, Estado de México, publicado en la Gaceta Municipal No. 10, de fecha 22 de febrero de 2022 con la presencia de los (as) CC. '.$respuesta["FCPATRIMONIO"].' y '.$respuesta["FCJEFEPATRIMONIO"].', de la Subdirección de Patrimonio Municipal dependiente de la Secretaría del Ayuntamiento; '.$sindicatura["FCNOMBRE"].', y Elsa Patricia Maldonado Benítez, representantes de la Segunda Sindicatura; y '.$respuesta["FCENLACE"].', Enlace Administrativo de la (del) '.$respuesta["FCAREA"].', mismos que se identifican con credencial para votar con números de folio '.$respuesta["FCNUMCONTRALOR"].', '.$respuesta["FCNUMPATRIMONIO"].', '.$respuesta["FCNUMJEFEPATRIMONIO"].', '.$sindicatura["FCEMPLEADO"].' ,3213013148358 y '.$respuesta["FCNUMENLACE"].' respectivamente, expedidas por el Instituto Nacional Electoral, documentos en los que aparecen sus fotografías, nombres y firmas, los cuales se tuvieron a la vista, se examinaron y se devolvieron de conformidad a sus portadores por ser de uso oficial, luego de obtener copias simples, mismas que se anexan a la presente; se encuentran constituidos en '.$respuesta["FCDIRECCION"].', domicilio que ocupa la (el) '.$respuesta["FCAREA"].', con el objeto de levantar la presente Acta Circunstanciada, en la que se hacen constar los siguientes:','pFont','pStyle');
         
         $section->addTextBreak();
 
@@ -281,12 +288,12 @@ class WordController
         $section->addTextBreak();
 
         $section->addText("_______________________________                                     _______________________________", 'fFirma', 'pFirma');
-        $section->addText("C. ".$respuesta["FCSSINDICATURA"]. "                                                C. Elsa Patricia Maldonado Benítez", 'fFirma', 'pFirma');
+        $section->addText("C. ".$sindicatura["FCNOMBRE"]. "                                                C. Elsa Patricia Maldonado Benítez", 'fFirma', 'pFirma');
 
        
         //$section->addText("_______________________________", 'fFirma', 'pFirma');
 
-        //$section->addText("C. " . $respuesta["FCSSINDICATURA"], 'fFirma', 'pFirma');
+        //$section->addText("C. " . $sindicatura["FCNOMBRE"], 'fFirma', 'pFirma');
 
         $section->addTextBreak();
         $section->addTextBreak();
@@ -348,9 +355,10 @@ class WordController
     }
 }
 
-if(isset($_GET['idActa'])){
+if(isset($_GET['idActa']) && isset($_GET['sindicaturaId'])){
     $descargarWord = new WordController();
     $descargarWord->idActa = $_GET['idActa'];
+    $descargarWord->sindicaturaId = $_GET['sindicaturaId'];
     $descargarWord->ctrGenerateWord();
     
 }

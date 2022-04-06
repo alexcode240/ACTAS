@@ -53,5 +53,25 @@ class UsersController
         }
     }
 
+    static public function ctrShowUsersSindicatura($item, $valor)
+    {
+
+        $tabla = "tbempleados";
+
+        $respuesta = ModelUsers::mdlShowUsersSindicatura($tabla, $item, $valor);
+
+        return $respuesta;
+    }
+
+    static public function ctrShowUsers($item, $valor)
+    {
+
+        $tabla = "tbempleados";
+
+        $respuesta = ModelUsers::mdlShowUsers($tabla, $item, $valor);
+
+        return $respuesta;
+    }
+
 
 }

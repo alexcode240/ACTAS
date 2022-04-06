@@ -62,6 +62,28 @@
                                     </div>
                                 </div>
                                 <div class="form-group col-6">
+                                    <label>Seleccione representante de la segunda sindicatura</label>
+                                    <div class="input-group" id="sindicatura">
+                                        <select class="form-control selectorSindicatura" name="sindicatura" style="width: 100%;" required>
+                                            <option value="" selected>Seleccione un representante</option>
+                                            <?php
+
+                                            $item = 'FIAREAID';
+                                            $valor = '40';
+
+                                            $empleados = UsersController::ctrShowUsersSindicatura($item, $valor);
+
+                                            foreach ($empleados as $key => $value) {
+                                                
+                                                echo '<option value="' . $value["FIEMPLEADOID"] . '">' . $value["FCNOMBRE"] . ' </option>';
+                                            }
+
+                                            ?>
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-6">
                                     <label>Fecha de elaboración del Acta</label>
                                     <div class="input-group date" id="fechaElaboracion" data-target-input="nearest">
                                         <input type="text" class="form-control datetimepicker-input fechaElaboracion" name="fechaElaboracion" data-target="#fechaElaboracion" />
