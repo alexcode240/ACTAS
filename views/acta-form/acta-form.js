@@ -3,15 +3,15 @@ function Unidades(num) {
     case 1:
       return "UN";
     case 2:
-      return "DÓS";
+      return "DOS";
     case 3:
-      return "TRÉS";
+      return "TRES";
     case 4:
       return "CUATRO";
     case 5:
       return "CINCO";
     case 6:
-      return "SÉIS";
+      return "SEIS";
     case 7:
       return "SIETE";
     case 8:
@@ -43,7 +43,13 @@ function Decenas(num) {
         case 5:
           return "QUINCE";
         default:
-          return "DIECI" + Unidades(unidad);
+          let uni = "";
+          if(unidad == 6){
+            uni = "SÉIS";
+          }else{
+            uni = Unidades(unidad);
+          }
+          return "DIECI" + uni;
       }
     case 2:
       switch (unidad) {
@@ -63,16 +69,6 @@ function Decenas(num) {
           return "VEINTI" + uni;
       }
     case 3:
-      let uni = "";
-      if (unidad == 2) {
-        uni = "DÓS";
-      } else if (unidad == 3) {
-        uni = "TRÉS";
-      } else if (unidad == 6) {
-        uni = "SÉIS";
-      } else {
-        uni = Unidades(unidad);
-      }
       return DecenasY("TREINTA", unidad);
     case 4:
       return DecenasY("CUARENTA", unidad);
