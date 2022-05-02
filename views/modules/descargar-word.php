@@ -231,13 +231,16 @@ class WordController
         $table2->addCell(334, $styleCell)->addText(htmlspecialchars($bmfTotal), $cellFontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
         $table2->addCell(334, $styleCell)->addText(htmlspecialchars($bmfActivoFijo), $cellFontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
         $table2->addCell(334, $styleCell)->addText(htmlspecialchars($bmfBajoCosto), $cellFontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
-        
+
+        $section->addTextBreak();
+
+
+        $section->addText("Folio: " . $respuesta["FCFOLIO"] . "/02/04", 'ptFont', 'ptStyle');
+
         $section->addTextBreak();
         $section->addTextBreak();
 
-        $section->addText("Folio: " . $respuesta["FCFOLIO"]."/02/04", 'ptFont', 'ptStyle');
-
-        $section->addTextBreak();
+        $section->addText("Cabe señalar que del universo de los X bienes muebles X tienen la leyenda: “bien marcado como faltante en la cuenta pública 2015, se propone para baja conforme al artículo sexagésimo noveno y septuagésimo, sección quinta, de los bienes no localizados” de los cuales X fueron presentados durante el Levantamiento en comento y X no fueron localizados en las instalaciones de la " . $respuesta["FCAREA"] . " detallando sus datos de identificación en el ANEXO III de la presente Acta Circunstanciada.", 'pFont', 'pStyle');
 
         $textoFinal1 = "En ese contexto, los bienes muebles faltantes se detallan en el “ANEXO B” y los sobrantes en el “ANEXO C” de la presente Acta Circunstanciada.";
 
@@ -272,8 +275,6 @@ class WordController
         $section->addText("_______________________________                                     _______________________________", 'fFirma', 'pFirma');
         $section->addText("C. ".$respuesta["FCPATRIMONIO"]. "                                                    C. Hugo Espinosa Nieto", 'fFirma', 'pFirma');
 
-        $section->addTextBreak();
-        $section->addTextBreak();
         $section->addTextBreak();
         $section->addTextBreak();
        
