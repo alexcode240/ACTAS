@@ -13,6 +13,7 @@ class WordController
 {
     public $idActa;
     public $sindicaturaId;
+    public $bienesSob;
 
     public function ctrGenerateWord()
     {
@@ -69,13 +70,25 @@ class WordController
 
 
         /*$phpWord->addNumberingStyle(
-            'hNum',
+            'multilevel',
             array(
                 'type' => 'multilevel', 'levels' => array(
                     array('pStyle' => 'Heading1','format' => 'decimal', 'text' => '%1.')
                 )
             )
         );*/
+        $phpWord->addNumberingStyle(
+            'multilevel',
+            array(
+                'type' => 'multilevel',
+                'levels' => array(
+                    array('format' => 'decimal', 'text' => '%1.', 'left' => 720, 'hanging' => 720, 'tabPos' => 720),
+                )
+                
+            ),
+            
+                
+        );
         //$phpWord->addNumberingStyle('multilevel', array('type' => 'multilevel', 'levels' => array(array('format' => 'decimal', 'text' => '%1.', 'left' => 720, 'hanging' => 720, 'tabPos' => 720), array('format' => 'upperLetter', 'text' => '%2.', 'left' => 720, 'hanging' => 360, 'tabPos' => 720))));
         //$predefinedMultilevel = array('listType' => \PhpOffice\PhpWord\Style\ListItem::TYPE_NUMBER_NESTED);
 
@@ -126,11 +139,11 @@ class WordController
 
         $section->addText('En el Municipio de Tlalnepantla de Baz, Estado de México, siendo las '.$fechaElaboracion["hora"].' horas con ' . $fechaElaboracion["minutos"] .' minutos, del día ' . $fechaElaboracion["dia"] .' de ' . $fechaElaboracion["mes"] .' de ' . $fechaElaboracion["anio"] . ', él (la) C. '.$respuesta["FCCONTRALOR"].', servidor público adscrito al Departamento de Auditoría Operacional, Administrativa y Legal, dependiente de la Subcontraloría de Fiscalización de la Contraloría Interna Municipal, quien actúa con fundamento en lo dispuesto en los artículos 174, 175, 176 fracción III, 177 fracciones I y XII, 178, 179 fracciones I, II, III, IV, IX y XII, 193 fracción I, 194 fracciones V y VI, 195 fracciones I, III, IV, VI y X y 196 del Reglamento Interno de la Administración Pública Municipal de Tlalnepantla de Baz, Estado de México, publicado en la Gaceta Municipal No. 10, de fecha 22 de febrero de 2022 con la presencia de los (as) CC. '.$respuesta["FCPATRIMONIO"].' y '.$respuesta["FCJEFEPATRIMONIO"].', de la Subdirección de Patrimonio Municipal dependiente de la Secretaría del Ayuntamiento; '.$sindicatura["FCNOMBRE"].', y Elsa Patricia Maldonado Benítez, representantes de la Segunda Sindicatura; y '.$respuesta["FCENLACE"].', Enlace Administrativo de la (del) '.$respuesta["FCAREA"].', mismos que se identifican con credencial para votar con números de folio '.$respuesta["FCNUMCONTRALOR"].', '.$respuesta["FCNUMPATRIMONIO"].', '.$respuesta["FCNUMJEFEPATRIMONIO"].', '.$sindicatura["FCEMPLEADO"].' ,3213013148358 y '.$respuesta["FCNUMENLACE"].' respectivamente, expedidas por el Instituto Nacional Electoral, documentos en los que aparecen sus fotografías, nombres y firmas, los cuales se tuvieron a la vista, se examinaron y se devolvieron de conformidad a sus portadores por ser de uso oficial, luego de obtener copias simples, mismas que se anexan a la presente; se encuentran constituidos en '.$respuesta["FCDIRECCION"].', domicilio que ocupa la (el) '.$respuesta["FCAREA"].', con el objeto de levantar la presente Acta Circunstanciada, en la que se hacen constar los siguientes:','pFont','pStyle');
         
-        $section->addTextBreak();
+        //$section->addTextBreak();
 
         $section->addText('HECHOS','ptFont','ptStyle');
 
-        $section->addTextBreak();
+        //$section->addTextBreak();
 
         //$phpWord->addTitleStyle(1, array('name' => 'Tahoma', 'bold' => false, 'size' => 11, 'color' => 'black'), array('numStyle' => 'hNum', 'numLevel' => 0));
 
@@ -139,10 +152,11 @@ class WordController
 
         $fechaLevantamiento = json_decode($respuesta["FCFECHALEVANTAMIENTO"], true);
         $fechaFinLevantamiento = json_decode($respuesta["FCFECHAFINLEVANTAMIENTO"], true);
-        $hecho1 = "1.	Los Servidores Públicos con adscripción al Órgano Interno de Control, a la Subdirección de Patrimonio Municipal, a la Segunda Sindicatura y a la (al) " . $respuesta["FCAREA"] . ", se constituyen el día, hora y lugar referido en el párrafo primero de la presente Acta Circunstanciada, esto en atención al oficio con número de folio " . $respuesta["FCOFICIO"] . ", de fecha " . $fechaOficio["dia"] . " de " . $fechaOficio["mes"] . " de " . $fechaOficio["anio"] . ", suscrito por él C.P. Ricardo Contreras Velázquez, Contralor Interno Municipal, el cual fue notificado el día " . $fechaNotificacion["dia"] . " de " . $fechaNotificacion["mes"] . " de " . $fechaNotificacion["anio"] . ", al (a la) C. " . $respuesta["FCENLACE"] . " en su carácter de Enlace Administrativo de la (del) " . $respuesta["FCAREA"] . " de Tlalnepantla de Baz, Estado de México, administración 2022-2024, a fin de comunicarle que el PRIMER LEVANTAMIENTO FÍSICO DE BIENES MUEBLES DE 2022, sería del " . $fechaLevantamiento["dia"] . " de " . $fechaLevantamiento["mes"] . " al " . $fechaFinLevantamiento["dia"] . " de " . $fechaFinLevantamiento["mes"] . " de " . $fechaFinLevantamiento["anio"] . ", a partir de las " . $fechaLevantamiento["hora"] . " horas, para verificar la existencia física de los bienes muebles en uso y custodia de la (del) ". $respuesta["FCAREA"] .", con base en el INVENTARIO DE BIENES MUEBLES E INMUEBLES conciliados con la tesorería municipal e integrados en el informe mensual municipal de DICIEMBRE de 2021, en relación al LISTADO DE BIENES MUEBLES DEL PRIMER LEVANTAMIENTO FÍSICO 2022, de la (del) " . $respuesta["FCAREA"] . ", expedido por la Subdirección de Patrimonio Municipal, dependiente de la Secretaría del Ayuntamiento.";
-        
-        $section->addText(htmlspecialchars($hecho1, ENT_COMPAT, 'UTF-8') , 'pFont', 'pStyle');
-        
+        $hecho1 = "Los Servidores Públicos con adscripción al Órgano Interno de Control, a la Subdirección de Patrimonio Municipal, a la Segunda Sindicatura y a la (al) " . $respuesta["FCAREA"] . ", se constituyen el día, hora y lugar referido en el párrafo primero de la presente Acta Circunstanciada, esto en atención al oficio con número de folio " . $respuesta["FCOFICIO"] . ", de fecha " . $fechaOficio["dia"] . " de " . $fechaOficio["mes"] . " de " . $fechaOficio["anio"] . ", suscrito por él C.P. Ricardo Contreras Velázquez, Contralor Interno Municipal, el cual fue notificado el día " . $fechaNotificacion["dia"] . " de " . $fechaNotificacion["mes"] . " de " . $fechaNotificacion["anio"] . ", al (a la) C. " . $respuesta["FCENLACE"] . " en su carácter de Enlace Administrativo de la (del) " . $respuesta["FCAREA"] . " de Tlalnepantla de Baz, Estado de México, administración 2022-2024, a fin de comunicarle que el PRIMER LEVANTAMIENTO FÍSICO DE BIENES MUEBLES DE 2022, sería del " . $fechaLevantamiento["dia"] . " de " . $fechaLevantamiento["mes"] . " al " . $fechaFinLevantamiento["dia"] . " de " . $fechaFinLevantamiento["mes"] . " de " . $fechaFinLevantamiento["anio"] . ", a partir de las " . $fechaLevantamiento["hora"] . " horas, para verificar la existencia física de los bienes muebles en uso y custodia de la (del) ". $respuesta["FCAREA"] .", con base en el INVENTARIO DE BIENES MUEBLES E INMUEBLES conciliados con la tesorería municipal e integrados en el informe mensual municipal de DICIEMBRE de 2021, en relación al LISTADO DE BIENES MUEBLES DEL PRIMER LEVANTAMIENTO FÍSICO 2022, de la (del) " . $respuesta["FCAREA"] . ", expedido por la Subdirección de Patrimonio Municipal, dependiente de la Secretaría del Ayuntamiento.";
+
+        //$section->addText(htmlspecialchars($hecho1, ENT_COMPAT, 'UTF-8') , 'pFont', 'pStyle');
+        $section->addListItem($hecho1, 0, 'pFont', 'multilevel', 'pStyle');
+
         $section->addTextBreak();
         
         
@@ -151,13 +165,15 @@ class WordController
         $section->addTextBreak();
         
        // $hecho2 = "2.	En uso de la palabra el C. ".$respuesta["FCCONTRALOR"].", representante de la Contraloría Interna Municipal, le solicita al C. ".$respuesta["FCENLACE"].", Enlace Administrativo del ".$respuesta["FCAREA"].", designe a dos testigos de asistencia; a lo que manifiesta que tiene a bien nombrar a los (as) CC. ".$stringNombreTestigos.", quienes se identifican con credencial para votar con números de FOLIO ".$stringNumEmpleadoTestigos." respectivamente, expedidas por el Instituto Nacional Electoral, Estado de México, documentos en los que aparecen sus fotografías, nombres y firmas, los cuales se tuvieron a la vista, se examinaron y se devolvieron de conformidad a sus portadores por ser de uso oficial, luego de obtener copias simples, mismas que se anexan en la presente Acta Circunstanciada.";
-       $hecho2 = "2.	En uso de la palabra él (la) C. ".$respuesta["FCCONTRALOR"].", representante de la Contraloría Interna Municipal, le solicita al (a la) C. ".$respuesta["FCENLACE"].", Enlace Administrativo de la (del) ".$respuesta["FCAREA"].", designe a dos testigos de asistencia; a lo que manifiesta que tiene a bien nombrar a los (as) CC. INGRESE NOMBRES DE LOS TESTIGOS, quienes se identifican con credencial para votar con números de folio INGRESE NUMEROS DE FOLIO DE LOS TESTIGOS respectivamente, expedidas por el Instituto Nacional Electoral, documentos en los que aparecen sus fotografías, nombres y firmas, los cuales se tuvieron a la vista, se examinaron y se devolvieron de conformidad a sus portadores por ser de uso oficial, luego de obtener copias simples, mismas que se anexan en la presente Acta Circunstanciada.";
-       
-       $section->addText(htmlspecialchars($hecho2, ENT_COMPAT, 'UTF-8') , 'pFont', 'pStyle');
+       $hecho2 = "En uso de la palabra él (la) C. ".$respuesta["FCCONTRALOR"].", representante de la Contraloría Interna Municipal, le solicita al (a la) C. ".$respuesta["FCENLACE"].", Enlace Administrativo de la (del) ".$respuesta["FCAREA"].", designe a dos testigos de asistencia; a lo que manifiesta que tiene a bien nombrar a los (as) CC. INGRESE NOMBRES DE LOS TESTIGOS, quienes se identifican con credencial para votar con números de folio INGRESE NUMEROS DE FOLIO DE LOS TESTIGOS respectivamente, expedidas por el Instituto Nacional Electoral, documentos en los que aparecen sus fotografías, nombres y firmas, los cuales se tuvieron a la vista, se examinaron y se devolvieron de conformidad a sus portadores por ser de uso oficial, luego de obtener copias simples, mismas que se anexan en la presente Acta Circunstanciada.";
 
-        $hecho3 = "3.	En uso de la palabra él (la) C. ".$respuesta["FCPATRIMONIO"].", representante de la Subdirección de Patrimonio Municipal, señala: en el Primer Levantamiento Físico de Bienes Muebles, personal de la Subdirección de Patrimonio Municipal acudió al espacio físico, del ".$fechaLevantamiento["dia"]." de ".$fechaLevantamiento["mes"]." al ". $fechaFinLevantamiento["dia"] . " de " . $fechaFinLevantamiento["mes"] . " de " . $fechaFinLevantamiento["anio"] .", donde se encuentran los bienes muebles en uso y custodia de la (del) ".$respuesta["FCAREA"] .", para verificar la existencia física y datos de identificación de los mismos, con la participación del personal habilitado de la Segunda Sindicatura y de la Contraloría Interna Municipal, así como él (la) C. ".$respuesta["FCENLACE"].", Enlace Administrativo de la (del) ".$respuesta["FCAREA"].", situación que se acredita con la (s) Bitácora (s) de Trabajo emitidas por el representante del Órgano Interno de Control, anexa (s) en la presente Acta Circunstanciada.";
+        //$section->addText(htmlspecialchars($hecho2, ENT_COMPAT, 'UTF-8') , 'pFont', 'pStyle');
+        $section->addListItem($hecho2, 0, 'pFont', 'multilevel', 'pStyle');
 
-        $section->addText(htmlspecialchars($hecho3, ENT_COMPAT, 'UTF-8') , 'pFont', 'pStyle');
+        $hecho3 = "En uso de la palabra él (la) C. ".$respuesta["FCPATRIMONIO"].", representante de la Subdirección de Patrimonio Municipal, señala: en el Primer Levantamiento Físico de Bienes Muebles, personal de la Subdirección de Patrimonio Municipal acudió al espacio físico, del ".$fechaLevantamiento["dia"]." de ".$fechaLevantamiento["mes"]." al ". $fechaFinLevantamiento["dia"] . " de " . $fechaFinLevantamiento["mes"] . " de " . $fechaFinLevantamiento["anio"] .", donde se encuentran los bienes muebles en uso y custodia de la (del) ".$respuesta["FCAREA"] .", para verificar la existencia física y datos de identificación de los mismos, con la participación del personal habilitado de la Segunda Sindicatura y de la Contraloría Interna Municipal, así como él (la) C. ".$respuesta["FCENLACE"].", Enlace Administrativo de la (del) ".$respuesta["FCAREA"].", situación que se acredita con la (s) Bitácora (s) de Trabajo emitidas por el representante del Órgano Interno de Control, anexa (s) en la presente Acta Circunstanciada.";
+
+        //$section->addText(htmlspecialchars($hecho3, ENT_COMPAT, 'UTF-8') , 'pFont', 'pStyle');
+        $section->addListItem($hecho3, 0, 'pFont', 'multilevel', 'pStyle');
 
         //$section->addTextBreak();
 
@@ -206,31 +222,58 @@ class WordController
         $textoPreTotales = "Posteriormente, en uso de la palabra él (la) C. ".$respuesta["FCCONTRALOR"].", representante del Órgano Interno de Control, manifiesta que una vez conciliada la información con el personal habilitado de la Subdirección de Patrimonio Municipal, de la Segunda Sindicatura y de la (del) ".$respuesta["FCAREA"].", se obtuvo como resultado del PRIMER LEVANTAMIENTO FÍSICO DE BIENES MUEBLES DE 2022, lo siguiente:";
         
         $section->addText(htmlspecialchars($textoPreTotales, ENT_COMPAT, 'UTF-8') , 'pFont', 'pStyle');
+        if($this->bienesSob == "true"){
 
-        $table2 = $section->addTable(array('unit' => \PhpOffice\PhpWord\Style\Table::WIDTH_PERCENT, 'width' => 100 * 50, 'borderSize' => 1, 'borderColor' => '000000', 'cellMargin' => 1, 'align' => 'center'));
-        $table2->addRow(-300);
-        $table2->addCell(1002, $styleFirstCell2)->addText(htmlspecialchars('Bienes Muebles'), $fontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
-        $table2->addCell(1002, $styleFirstSpan)->addText(htmlspecialchars('Bienes Muebles Presentados'), $fontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
-        $table2->addCell(1002, $styleFirstSpan)->addText(htmlspecialchars('Bienes Muebles Faltantes'), $fontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
+            $table2 = $section->addTable(array('unit' => \PhpOffice\PhpWord\Style\Table::WIDTH_PERCENT, 'width' => 100 * 50, 'borderSize' => 1, 'borderColor' => '000000', 'cellMargin' => 1, 'align' => 'center'));
+            $table2->addRow(-300);
+            $table2->addCell(1002, $styleFirstCell2)->addText(htmlspecialchars('Bienes Muebles'), $fontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
+            $table2->addCell(1002, $styleFirstSpan)->addText(htmlspecialchars('Bienes Muebles Presentados'), $fontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
+            $table2->addCell(1002, $styleFirstSpan)->addText(htmlspecialchars('Bienes Muebles Faltantes'), $fontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
 
-        $table2->addRow(-300);
-        $table2->addCell(334, $styleFirstCell)->addText(htmlspecialchars('Sobrantes'), $fontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
-        $table2->addCell(334, $styleFirstCell)->addText(htmlspecialchars('Total'), $fontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
-        $table2->addCell(334, $styleFirstCell)->addText(htmlspecialchars('Activo Fijo'), $fontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
-        $table2->addCell(334, $styleFirstCell)->addText(htmlspecialchars('Bajo Costo'), $fontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
-        $table2->addCell(334, $styleFirstCell)->addText(htmlspecialchars('Total'), $fontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
-        $table2->addCell(334, $styleFirstCell)->addText(htmlspecialchars('Activo Fijo'), $fontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
-        $table2->addCell(334, $styleFirstCell)->addText(htmlspecialchars('Bajo Costo'), $fontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
+            $table2->addRow(-300);
+            $table2->addCell(334, $styleFirstCell)->addText(htmlspecialchars('Sobrantes'), $fontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
+            $table2->addCell(334, $styleFirstCell)->addText(htmlspecialchars('Total'), $fontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
+            $table2->addCell(334, $styleFirstCell)->addText(htmlspecialchars('Activo Fijo'), $fontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
+            $table2->addCell(334, $styleFirstCell)->addText(htmlspecialchars('Bajo Costo'), $fontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
+            $table2->addCell(334, $styleFirstCell)->addText(htmlspecialchars('Total'), $fontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
+            $table2->addCell(334, $styleFirstCell)->addText(htmlspecialchars('Activo Fijo'), $fontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
+            $table2->addCell(334, $styleFirstCell)->addText(htmlspecialchars('Bajo Costo'), $fontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
 
-        
-        $table2->addRow(-300,array('exactHeight'=>false, 'height'));
-        $table2->addCell(334, $styleCell)->addText(htmlspecialchars('0'), $cellFontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
-        $table2->addCell(334, $styleCell)->addText(htmlspecialchars($bmpTotal), $cellFontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
-        $table2->addCell(334, $styleCell)->addText(htmlspecialchars($bmpActivoFijo), $cellFontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
-        $table2->addCell(334, $styleCell)->addText(htmlspecialchars($bmpBajoCosto), $cellFontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
-        $table2->addCell(334, $styleCell)->addText(htmlspecialchars($bmfTotal), $cellFontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
-        $table2->addCell(334, $styleCell)->addText(htmlspecialchars($bmfActivoFijo), $cellFontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
-        $table2->addCell(334, $styleCell)->addText(htmlspecialchars($bmfBajoCosto), $cellFontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
+            
+            $table2->addRow(-300,array('exactHeight'=>false, 'height'));
+            $table2->addCell(334, $styleCell)->addText(htmlspecialchars('0'), $cellFontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
+            $table2->addCell(334, $styleCell)->addText(htmlspecialchars($bmpTotal), $cellFontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
+            $table2->addCell(334, $styleCell)->addText(htmlspecialchars($bmpActivoFijo), $cellFontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
+            $table2->addCell(334, $styleCell)->addText(htmlspecialchars($bmpBajoCosto), $cellFontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
+            $table2->addCell(334, $styleCell)->addText(htmlspecialchars($bmfTotal), $cellFontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
+            $table2->addCell(334, $styleCell)->addText(htmlspecialchars($bmfActivoFijo), $cellFontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
+            $table2->addCell(334, $styleCell)->addText(htmlspecialchars($bmfBajoCosto), $cellFontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
+        }else{
+            $table2 = $section->addTable(array('unit' => \PhpOffice\PhpWord\Style\Table::WIDTH_PERCENT, 'width' => 100 * 50, 'borderSize' => 1, 'borderColor' => '000000', 'cellMargin' => 1, 'align' => 'center'));
+            $table2->addRow(-300);
+            
+            $table2->addCell(1002, $styleFirstSpan)->addText(htmlspecialchars('Bienes Muebles Presentados'), $fontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
+            $table2->addCell(1002, $styleFirstSpan)->addText(htmlspecialchars('Bienes Muebles Faltantes'), $fontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
+
+            $table2->addRow(-300);
+            
+            $table2->addCell(334, $styleFirstCell)->addText(htmlspecialchars('Total'), $fontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
+            $table2->addCell(334, $styleFirstCell)->addText(htmlspecialchars('Activo Fijo'), $fontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
+            $table2->addCell(334, $styleFirstCell)->addText(htmlspecialchars('Bajo Costo'), $fontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
+            $table2->addCell(334, $styleFirstCell)->addText(htmlspecialchars('Total'), $fontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
+            $table2->addCell(334, $styleFirstCell)->addText(htmlspecialchars('Activo Fijo'), $fontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
+            $table2->addCell(334, $styleFirstCell)->addText(htmlspecialchars('Bajo Costo'), $fontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
+
+
+            $table2->addRow(-300, array('exactHeight' => false, 'height'));
+            
+            $table2->addCell(334, $styleCell)->addText(htmlspecialchars($bmpTotal), $cellFontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
+            $table2->addCell(334, $styleCell)->addText(htmlspecialchars($bmpActivoFijo), $cellFontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
+            $table2->addCell(334, $styleCell)->addText(htmlspecialchars($bmpBajoCosto), $cellFontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
+            $table2->addCell(334, $styleCell)->addText(htmlspecialchars($bmfTotal), $cellFontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
+            $table2->addCell(334, $styleCell)->addText(htmlspecialchars($bmfActivoFijo), $cellFontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
+            $table2->addCell(334, $styleCell)->addText(htmlspecialchars($bmfBajoCosto), $cellFontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
+        }
 
         $section->addTextBreak();
 
@@ -356,10 +399,11 @@ class WordController
     }
 }
 
-if(isset($_GET['idActa']) && isset($_GET['sindicaturaId'])){
+if(isset($_GET['idActa']) && isset($_GET['sindicaturaId']) && isset($_GET['bienesSob'])){
     $descargarWord = new WordController();
     $descargarWord->idActa = $_GET['idActa'];
     $descargarWord->sindicaturaId = $_GET['sindicaturaId'];
+    $descargarWord->bienesSob = $_GET['bienesSob'];
     $descargarWord->ctrGenerateWord();
     
 }

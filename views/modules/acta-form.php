@@ -74,7 +74,7 @@
                                             $empleados = UsersController::ctrShowUsersSindicatura($item, $valor);
 
                                             foreach ($empleados as $key => $value) {
-                                                
+
                                                 echo '<option value="' . $value["FIEMPLEADOID"] . '">' . $value["FCNOMBRE"] . ' </option>';
                                             }
 
@@ -156,7 +156,7 @@
                                 <div class="form-group col-6">
                                     <label>Bienes Muebles Presentados (Activo Fijo)</label>
                                     <div class="input-group">
-                                        <input type="number" min="0" class="form-control folio" id="BMPActivoFijo" name="BMPActivoFijo">
+                                        <input type="number" min="0" class="form-control" id="BMPActivoFijo" name="BMPActivoFijo">
                                         <div class="input-group-append">
                                             <div class="input-group-text"><i class="fa fa-hashtag"></i></div>
                                         </div>
@@ -165,7 +165,7 @@
                                 <div class="form-group col-6">
                                     <label>Bienes Muebles Presentados (Bajo Costo)</label>
                                     <div class="input-group">
-                                        <input type="number" min="0" class="form-control folio" id="BMPBajoCosto" name="BMPBajoCosto">
+                                        <input type="number" min="0" class="form-control" id="BMPBajoCosto" name="BMPBajoCosto">
                                         <div class="input-group-append">
                                             <div class="input-group-text"><i class="fa fa-hashtag"></i></div>
                                         </div>
@@ -174,7 +174,7 @@
                                 <div class="form-group col-6">
                                     <label>Bienes Muebles Faltantes (Activo Fijo)</label>
                                     <div class="input-group">
-                                        <input type="number" min="0" class="form-control folio" id="BMFActivoFijo" name="BMFActivoFijo">
+                                        <input type="number" min="0" class="form-control" id="BMFActivoFijo" name="BMFActivoFijo">
                                         <div class="input-group-append">
                                             <div class="input-group-text"><i class="fa fa-hashtag"></i></div>
                                         </div>
@@ -183,14 +183,26 @@
                                 <div class="form-group col-6">
                                     <label>Bienes Muebles Faltantes (Bajo Costo)</label>
                                     <div class="input-group">
-                                        <input type="number" min="0" class="form-control folio" id="BMFBajoCosto" name="BMFBajoCosto">
+                                        <input type="number" min="0" class="form-control" id="BMFBajoCosto" name="BMFBajoCosto">
                                         <div class="input-group-append">
                                             <div class="input-group-text"><i class="fa fa-hashtag"></i></div>
                                         </div>
                                     </div>
                                 </div>
 
+                                <div class="form-group col-lg-2 text-left">
+                                    <label for="bienesSobrantes">¿Existen bienes muebles sobrantes?</label>
+                                    <div class="input-group pull-left bienesSobrantes">
 
+                                        <label class="switch">
+                                            <input autocomplete="off" type="checkbox" id="bienesSobrantes" name="bienesSobrantes" checked>
+                                            <div class="slider round"></div>
+                                        </label>
+
+
+                                    </div>
+                                </div>
+                                
                                 <a id="descargarWord" href="" style="display:none">Descargar Acta</a>
                                 <button type="button" id="generarActa" class="btn btn-primary float-right">Generar Acta</button>
                                 <!-- Date -->

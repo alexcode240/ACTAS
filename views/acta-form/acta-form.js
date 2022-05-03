@@ -461,21 +461,56 @@ let validarDatos = () => {
   }else{
     $(".folio").removeClass("is-invalid");
   }
+
+  if($("#BMPActivoFijo").val() == ""){
+    validacion = false;
+    $("#BMPActivoFijo").addClass("is-invalid");
+  }else{
+    $("#BMPActivoFijo").removeClass("is-invalid");
+  }
+
+  if($("#BMPBajoCosto").val() == ""){
+    validacion = false;
+    $("#BMPBajoCosto").addClass("is-invalid");
+  }else{
+    $("#BMPBajoCosto").removeClass("is-invalid");
+  }
+
+  if($("#BMFActivoFijo").val() == ""){
+    validacion = false;
+    $("#BMFActivoFijo").addClass("is-invalid");
+  }else{
+    $("#BMFActivoFijo").removeClass("is-invalid");
+  }
+  if($("#BMFBajoCosto").val() == ""){
+    validacion = false;
+    $("#BMFBajoCosto").addClass("is-invalid");
+  }else{
+    $("#BMFBajoCosto").removeClass("is-invalid");
+  }
+  if ($(".fechaFinElaboracion").val() == "") {
+    validacion = false;
+    $(".fechaFinElaboracion").addClass("is-invalid");
+  } else {
+    $(".fechaFinElaboracion").removeClass("is-invalid");
+  }
+  
+  return validacion;
 }
 
-$(".formulario").on("change", () => {
-  validarDatos();
-});
+ $(".formulario").on("click", () => {
+   validarDatos();
+ });
 
 
 $("#generarActa")
   .click(function () {
 
-    //if (!validarDatos()) {
-      //alert("Faltan datos por llenar");
+    if (!validarDatos()) {
+      alert("Faltan datos por llenar");
 
-      //return;
-    //}
+      return;
+    }
     
     let area = $(".selectorArea option:selected").html();
     area = area.split('-')[1];
@@ -556,7 +591,12 @@ $("#generarActa")
     let bmfActivoFijo = $("#BMFActivoFijo").val();
     let bmfBajoCosto = $("#BMFBajoCosto").val();
 
+    let bienesSobrantes = true;
 
+    if (!$("#bienesSobrantes").is(":checked")) {
+      bienesSobrantes = false;
+    } 
+    
     var datos = new FormData();
     datos.append("FCOFICIO", folio);
     datos.append("FCFECHANOTIFICACION", fcFechaNotificacionOficio);
@@ -577,6 +617,7 @@ $("#generarActa")
     datos.append("FIBMPBAJOCOSTO", bmpBajoCosto);
     datos.append("FIBMFACTIVOFIJO", bmfActivoFijo);
     datos.append("FIBMFBAJOCOSTO", bmfBajoCosto);
+
     
     $.ajax({
       url: "ajax/generar-acta.ajax.php",
@@ -593,11 +634,13 @@ $("#generarActa")
            "views/modules/descargar-word.php?actaId=" +
              respuesta +
              "&sindicaturaId=" +
-             sindicaturaId
+             sindicaturaId +
+             "&bienesSob=" +
+              bienesSobrantes
          );
          
          window.open("views/modules/descargar-word.php?idActa="+respuesta+"&sindicaturaId=" +
-             sindicaturaId);
+             sindicaturaId + "&bienesSob=" + bienesSobrantes);
          //$("#descargarWord").click();
          /*Swal.fire({
            icon: "success",
