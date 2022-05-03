@@ -285,7 +285,14 @@ class WordController
 
         $section->addText("Cabe señalar que del universo de los X bienes muebles X tienen la leyenda: “bien marcado como faltante en la cuenta pública 2015, se propone para baja conforme al artículo sexagésimo noveno y septuagésimo, sección quinta, de los bienes no localizados” de los cuales X fueron presentados durante el Levantamiento en comento y X no fueron localizados en las instalaciones de la " . $respuesta["FCAREA"] . " detallando sus datos de identificación en el ANEXO III de la presente Acta Circunstanciada.", 'pFont', 'pStyle');
 
-        $textoFinal1 = "En ese contexto, los bienes muebles faltantes se detallan en el “ANEXO B” y los sobrantes en el “ANEXO C” de la presente Acta Circunstanciada.";
+        if($this->bienesSob == "true"){
+            
+            $sobrantesString = " y los sobrantes en el “ANEXO C”";
+        }else{
+            $sobrantesString = "";
+        }
+
+        $textoFinal1 = "En ese contexto, los bienes muebles faltantes se detallan en el “ANEXO B”".$sobrantesString." de la presente Acta Circunstanciada.";
 
         $section->addText(htmlspecialchars($textoFinal1, ENT_COMPAT, 'UTF-8') , 'pFont', 'pStyle');
 
