@@ -68,6 +68,19 @@ class WordController
             'marginTop' => 600, 'marginBottom' => 600, 'space' => array('line' => 1)));
         $phpWord->addFontStyle('pFont', array('name' => 'Tahoma', 'bold' => false, 'size' => 11, 'color' => 'black'));
 
+        $phpWord->addParagraphStyle('dtStyle', array('align' => 'right', 'marginLeft' => 600, 'marginRight' => 600,
+            'marginTop' => 600, 'marginBottom' => 600, 'space' => array('line' => 1)));
+        $phpWord->addFontStyle('dtFont', array('name' => 'Tahoma', 'bold' => true, 'size' => 11, 'color' => 'black'));
+
+        $phpWord->addParagraphStyle('dpStyle', array('align' => 'right', 'marginLeft' => 600, 'marginRight' => 600,
+            'marginTop' => 600, 'marginBottom' => 600, 'space' => array('line' => 1)));
+        $phpWord->addFontStyle('dpFont', array('name' => 'Tahoma', 'bold' => false, 'size' => 11, 'color' => 'black'));
+
+        $phpWord->addParagraphStyle('itStyle', array(
+            'align' => 'left', 'marginLeft' => 600, 'marginRight' => 600,
+            'marginTop' => 600, 'marginBottom' => 600, 'space' => array('line' => 1)
+        ));
+        $phpWord->addFontStyle('itFont', array('name' => 'Tahoma', 'bold' => true, 'size' => 11, 'color' => 'black'));
 
         /*$phpWord->addNumberingStyle(
             'multilevel',
@@ -386,7 +399,132 @@ class WordController
         $section->addTextBreak();
 
         $section->addText("Folio: " . $respuesta["FCFOLIO"]."/04/04", 'ptFont', 'ptStyle');
+
+        $section->addTextBreak();
+        $section->addTextBreak();
+
         
+        $fechaDeActa = $respuesta["FDFECHAACTA"];
+        $fechaDeActa = explode("-", $fechaDeActa);
+        $fechaDeActa = $fechaDeActa[2]." de ".$fechaElaboracion["mes"]." de ".$fechaDeActa[0];
+        
+        $textRun = $section->addTextRun('dtStyle');
+        $textRun->addText("Fecha: ", 'dtFont', 'dtStyle');
+        $textRun->addText($fechaDeActa , 'dpFont', 'dpStyle');
+
+        $textRun = $section->addTextRun('dtStyle');
+        $textRun->addText("No. de Oficio: ", 'dtFont', 'dtStyle');
+        $textRun->addText($respuesta["FCFOLIO"], 'dpFont', 'dpStyle');
+
+        $textRun = $section->addTextRun('dtStyle');
+        $textRun->addText("Asunto: ", 'dtFont', 'dtStyle');
+        $textRun->addText("Hallazgos del Primer Levantamiento", 'dpFont', 'dpStyle');
+
+        $fechaDeActa = $respuesta["FDFECHAACTA"];
+        $fechaDeActa = explode("-", $fechaDeActa);
+
+        $section->addText("Físico de Bienes Muebles " . $fechaDeActa[0] . " de la",'dpFont', 'dpStyle');
+        $section->addText($respuesta["FCAREA"],'dpFont', 'dpStyle');
+
+        $section->addText($respuesta["FCDIRECCION"], 'itFont', 'itStyle');
+        $section->addText($respuesta["FCCARGODIRECCION"]." DE LA ". $respuesta["FCAREA"], 'itFont', 'itStyle');
+        $section->addText("PRESENTE", 'itFont', 'itStyle');
+
+        $section->addTextBreak();
+        $section->addTextBreak();
+
+        $table3 = $section->addTable(array('unit' => \PhpOffice\PhpWord\Style\Table::WIDTH_PERCENT, 'width' => 100 * 50, 'borderSize' => 1, 'borderColor' => '000000', 'cellMargin' => 50, 'align' => 'center'));
+        $table3->addRow(-300);
+        $table3->addCell(1000, $styleFirstCell)->addText(htmlspecialchars('Recomendación'), $fontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
+        $table3->addCell(1500, $styleFirstCell)->addText(htmlspecialchars('Hallazgo'), $fontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
+       
+        $table3->addRow(0);
+        //Agregar textrun de un listado con un indice con numeros con negritas y despues texto sin negritas justificado
+        
+        $textRun = $table3->addCell(1500)->addTextRun(array('align' => 'lowKashida'));
+        $textRun->addText("Con fundamento en los artículos 129 párrafo primero y 130 de la ConstituciónPolítica del Estado Libre y Soberano de México; 11 fracción I de la Ley de Bienes del Estado de México y de sus Municipios; 91 fracción XI de la Ley Orgánica Municipal del Estado de México; Octogésimo Sexto de los Lineamientos para el Registro y Control del Inventario y la Conciliación y Desincorporación de Bienes Muebles e Inmuebles para las Entidades Fiscalizables Municipales del Estado de México, de fecha 11 de julio de 2013; y 14 fracciones I, III, VIII, IX, XIII, XVI, XVII, XVIII, XIX, XX Y XXIV del Reglamento Interno de la Administración Pública Municipal de Tlalnepantla de Baz, Estado de México publicado en la Gaceta Municipal No. 10, de fecha 22 de febrero de 2022; se recomienda en el ámbito de su competencia de realizar la búsqueda de los ".$bmfTotal." bienes muebles, considerando la información vertida en el último Resguardo que permitirá conocer a los servidores públicos responsables de su conservación y custodia. 
+
+Para los bienes muebles que se encuentran en el supuesto de bienes muebles No Localizados, el área administrativa y la Subdirección de Patrimonio Municipal, deberán de levantar el Acta Administrativa ante el Órgano Interno de Control, considerando que no pertenezcan al período constitucional de la administración pública municipal 2022-2024, es decir, de Bienes Muebles No Localizados  
+", 'pFont', 'pStyle');
+
+        $textRun = $table3->addCell(1000)->addTextRun(array('align' => 'lowKashida'));
+        $textRun->addText("1)	", $fontStyle, array('fontWeight' => 'bold'));
+        $textRun->addText("En el Primer Levantamiento Físico de Bienes Muebles de 2022, en uso y custodia de la Presidencia Municipal, se testificó la existencia física de " . $bmpTotal . " bienes muebles, de los cuales " . $bmpActivoFijo . "  son de activo fijo y " . $bmpBajoCosto . "  de bajo costo,de un universo de " . ($bmpTotal + $bmfTotal) . "  que se describen en el “LISTADO DE BIENES MUEBLES DEL PRIMER LEVANTAMIENTO FÍSICO 2022 CON CIFRAS AL 31 DE DICIEMBRE DE 2021, DE LA" . $respuesta["FCAREA"] . " ”, emitido por la Subdirección de Patrimonio Municipal de la Secretaría del Ayuntamiento; En ese contexto existen " . $bmfTotal . " bienes muebles no presentados, de los cuales " . $bmfActivoFijo . "  son de activo fijo y " . $bmfBajoCosto . "  de bajo costo. Por lo anterior X  tienen la leyenda “Bien marcado como faltante en la cuenta pública 2015, se propone para baja conforme al artículo Sexagésimo Noveno y Septuagésimo, Sección Quinta, de los bienes muebles no localizados”, mismos que se detallan en el anexo A.", 'pFont', 'pStyle');
+
+
+
+
+        $table3->addRow(0);
+        //Agregar textrun de un listado con un indice con numeros con negritas y despues texto sin negritas justificado
+
+        $textRun = $table3->addCell(1500)->addTextRun(array('align' => 'lowKashida'));
+        $textRun->addText("Con fundamento en los artículos 129 párrafo primero y 130 de la Constitución Política del Estado Libre y Soberano de México; 11 fracción I de la Ley de Bienes del Estado de México y de sus Municipios; 91 fracción XI de la Ley Orgánica Municipal del Estado de México; Capítulos XV, XVI y XIX de los Lineamientos para el Registro y Control del Inventario y la Conciliación y Desincorporación de Bienes Muebles e Inmuebles para las Entidades Fiscalizables Municipales del Estado de México, de fecha 11 de julio de 2013; y 14 fracciones I, III, VIII, IX, XIII, XVI, XVII, XVIII, XIX, XX y XXIV del Reglamento Interno de la Administración Pública Municipal de Tlalnepantla de Baz, Estado de México publicado en la Gaceta Municipal No. 10, de fecha 22 de febrero de 2022 se recomienda en el ámbito de su competencia documentar la legal procedencia de los X  bienes muebles que no se relacionan en el “Listado de Bienes Muebles del Primer Levantamiento Físico 2022, con cifras al 31 de Diciembre de 2021”.", 'pFont', 'pStyle');
+
+        $textRun = $table3->addCell(1000)->addTextRun(array('align' => 'lowKashida'));
+        $textRun->addText("2)	", $fontStyle, array('fontWeight' => 'bold'));
+        $textRun->addText("Existe además un total de X  bienes muebles sobrantes con etiqueta de inventario, pero no relacionadas en el “Listado de Bienes Muebles Primer Levantamiento Físico 2022, de laPresidencia Municipal ”, mismos que se detallan en el anexo B.", 'pFont', 'pStyle');
+
+        $section->addTextBreak();
+
+        $table4 = $section->addTable(array('unit' => \PhpOffice\PhpWord\Style\Table::WIDTH_PERCENT, 'width' => 100 * 50, 'borderSize' => 1, 'borderColor' => '000000', 'cellMargin' => 50, 'align' => 'center'));
+        $table4->addRow(-300);
+        $table4->addCell(2500, $styleFirstCell)->addText(htmlspecialchars('Recomendaciones Generales'), $fontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
+        
+        $table4->addRow(0);
+        $textRun = $table4->addCell(2500)->addTextRun(array('align' => 'lowKashida'));
+        $textRun->addText("a)	¿Deberá dar a conocer la obligación de los servidores públicos adscritos a la ".$respuesta["FCAREA"]." , respecto al cuidado de los bienes muebles en uso y custodia de los mismos, con apego a lo establecido en el artículo 88 fracción XI de la Ley del Trabajo de los Servidores Públicos del Estado y Municipios, que a la letra dice:", 'pFont', 'pStyle');
+        $textRun->addTextBreak();
+        $textRun->addTextBreak();
+        $textRun->addText("“XI. Tratar con cuidado y conservar en buen estado el equipo, mobiliario y útiles que se les proporcionen para el desempeño de su trabajo y no utilizarlos para objeto distinto al que están destinados e informar, invariablemente, a sus superiores inmediatos de los defectos y daños que aquéllos sufran tan pronto como los adviertan;”",array('italic' => true,'size' => 11),array('align' => 'center'));
+        $textRun->addTextBreak();
+        $textRun->addTextBreak();
+        $textRun->addTextBreak();
+        $textRun->addTextBreak();
+        $textRun->addText("b)	Mantener las medidas implementadas en el control interno de los bienes muebles (activo y bajo costo); además de llevar, el registro de los bienes muebles (gasto) no inventariables que aún cuentan con vida útil, así como de los bienes de propiedad de terceros, el cual deberá evidenciar cuando así lo requiera la Contraloría Interna Municipal.", 'pFont', 'pStyle');
+        $textRun->addTextBreak();
+        $textRun->addTextBreak();
+        $textRun->addText("c)	Para el registro de alta (adquisiciones por compra, donación, dación en pago) o baja (enajenación, robo o siniestro, obsolencia, donación, dación en pago, entre otros) de bienes muebles, se recomienda atender los requisitos en el ámbito de su competencia que refieren los capítulos XIX y XXI respectivamente, de los Lineamientos para el Registro y Control del Inventario y la Conciliación y Desincorporación de Bienes Muebles e Inmuebles para las Entidades Fiscalizables Municipales del Estado de México.", 'pFont', 'pStyle');
+
+        
+        $section->addTextBreak();
+        $textRun = $section->addTextRun('pStyle');
+        $textRun->addText("En ese contexto, se le otorga un término de ", 'pFont', 'pStyle');
+        $textRun->addText("cinco días hábiles, ", 'dtFont', 'dtStyle');
+        $textRun->addText("contados a partir del día siguiente al de la notificación del presente, a efecto de aclarar, justificar o solventar los hallazgos derivados del Primer Levantamiento Físico de Bienes Muebles de 2019, mediante documentación certificada generada en la dependencia a su cargo u obtenido de las autoridades competentes.", 'pFont', 'pStyle');
+        $section->addText("Sin otro particular, le reitero a usted, mi más atenta y distinguida consideración.", 'pFont');
+        $textRun->addTextBreak();
+        $textRun->addTextBreak();
+        $textRun->addTextBreak();
+        $textRun->addTextBreak();
+        $textRun->addTextBreak();
+        $textRun->addTextBreak();
+        $textRun->addTextBreak();
+        
+        $section->addText("A T E N T A M E N T E", 'fFirmaTitulo', 'pFirmaTitulo');
+        $section->addTextBreak();
+        $section->addTextBreak();
+        $section->addText("L.A.E. EDUARDO EFRAÍN BENHUMEA MACEDO", 'fFirmaTitulo', 'pFirmaTitulo');
+        $section->addTextBreak();
+        $section->addTextBreak();
+        $section->addText("CONTRALOR INTERNO MUNICIPAL", 'fFirmaTitulo', 'pFirmaTitulo');
+        $section->addTextBreak();
+        $section->addTextBreak();
+        $section->addTextBreak();
+        $section->addTextBreak();
+
+        $textRun = $section->addTextRun('pStyle');
+        $textRun->addText("C.c.p. Lic. Miguel Ángel Bravo Suberville, Secretario del Ayuntamiento.-Conocimiento.", array('font' => 'lowKashida','size'=>'9'), 'pStyle');
+        $textRun->addTextBreak();
+        $textRun->addText("C.c.p. C. ".$respuesta["FCPATRIMONIO"]." , Patrimonio Municipal de la ".$respuesta["FCAREA"]." .-Conocimiento.", array('font' => 'lowKashida','size'=>'9'), 'pStyle');
+        $textRun->addTextBreak();
+        $textRun->addText("C.c.p. C. Elsa Patricia Maldonado Benítez, representante de la Segunda Sindicatura.-Conocimiento. ", array('font' => 'lowKashida','size'=>'9'), 'pStyle');
+        $textRun->addTextBreak();
+        $textRun->addText("C.c.p. C. ".$respuesta["FCENLACE"]." , Enlace Administrativo de la ".$respuesta["FCAREA"]." .- Atención y Seguimiento.", array('font' => 'lowKashida','size'=>'9'), 'pStyle');
+        $textRun->addTextBreak();
+        $textRun->addText("Archivo/Minutario", array('font' => 'lowKashida','size'=>'9'), 'pStyle');
+        $textRun->addTextBreak();
+        $textRun->addText("EEBM/PRTC/MRG/Ehhb*", array('font' => 'lowKashida','size'=>'9'), 'pStyle');
+
         $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
 
         $fileTemp = 'ACTA' . random_int(100, 999) . '.docx';
