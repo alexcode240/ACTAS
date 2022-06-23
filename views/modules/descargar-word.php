@@ -120,22 +120,14 @@ class WordController
         $header = $section->createHeader();
         $header->addWatermark(
         '../../views/img/acta.png', [
-            'marginTop' => -40,
+            'marginTop' => -90,
             'marginLeft' => -50,
             'posHorizontal' => 'absolute',
             'posVertical' => 'absolute'
         ]);
 
 
-        $text = "\n\n";
-        $textlines = explode("\n", $text);
-
-        $textrun = $section->addTextRun();
-        $textrun->addText(array_shift($textlines));
-        foreach ($textlines as $line) {
-            $textrun->addTextBreak();
-            $textrun->addText($line);
-        }
+        
         
 
         $section->addText('ACTA CIRCUNSTANCIADA','tFont','tStyle');
