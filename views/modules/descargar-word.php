@@ -427,43 +427,48 @@ class WordController
         $section->addText($respuesta["FCAREA"],'dpFont', 'dpStyle');
 
         $section->addText($respuesta["FCDIRECCION"], 'itFont', 'itStyle');
-        $section->addText($respuesta["FCCARGODIRECCION"]." DE LA ". $respuesta["FCAREA"], 'itFont', 'itStyle');
+        $section->addText($respuesta["FCCARGODIRECCION"], 'itFont', 'itStyle');
         $section->addText("PRESENTE", 'itFont', 'itStyle');
 
-        $section->addTextBreak();
-        $section->addTextBreak();
+  
+
+        $section->addText("Con fundamento en lo dispuesto en los artículos 1, 2 fracción III, 5 fracción I, 13 fracción I, 14 fracción II, 17, 18 fracción VI, 52, 67 y 68 de la Ley de Bienes del Estado de México y de sus Municipios; 112 fracciones XV y XX de la Ley Orgánica Municipal del Estado de México; 174, 175, 176 fracción III, 177 fracciones I y XII, 178, 179 fracciones I, II, III, IV, IX y XII, 193 fracción I, 194 fracciones V y VI, 195 fracciones I, III, IV, VI y X y 196 del Reglamento Interno de la Administración Pública Municipal de Tlalnepantla de Baz, Estado de México, publicado en la Gaceta Municipal No. 10, de fecha 22 de febrero de 2022; así  en los numerales Primero, Noveno fracciones V, VII, VIII, IX, XIII, XXI, XXX, XXXII, XXXIII, XL, XLII y XLV, Decimo fracción I, Vigésimo, Vigésimo Primero, Trigésimo Séptimo, Trigésimo Octavo, Trigésimo Noveno fracciones I, II, III, IV y V y Cuadragésimo de los Lineamientos para el Registro y Control del Inventario y la Conciliación y Desincorporación de Bienes Muebles e Inmuebles para las Entidades Fiscalizables Municipales del Estado de México, publicados en la Gaceta del Gobierno del Estado de México, de fecha 11 de julio de 2013; en el Acta de la Primera Sesión Ordinaria del Comité de Bienes Muebles e Inmuebles de Tlalnepantla de Baz, México 2022-2024; en el oficio número ".$respuesta["FCFOLIO"]." , de fecha ".$fechaElaboracion["dia"]." de ".$fechaElaboracion["mes"]."  del año en curso, le notifico el Resultado del Primer Levantamiento Físico de Bienes Muebles 2022, realizado del ".$fechaLevantamiento["dia"]." al ".$fechaFinElaboracion["dia"]." de ".$fechaElaboracion["mes"]." de ".$fechaElaboracion["anio"]." del presente año.", 'pFont', 'pStyle');
+  
 
         $table3 = $section->addTable(array('unit' => \PhpOffice\PhpWord\Style\Table::WIDTH_PERCENT, 'width' => 100 * 50, 'borderSize' => 1, 'borderColor' => '000000', 'cellMargin' => 50, 'align' => 'center'));
         $table3->addRow(-300);
-        $table3->addCell(1000, $styleFirstCell)->addText(htmlspecialchars('Recomendación'), $fontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
         $table3->addCell(1500, $styleFirstCell)->addText(htmlspecialchars('Hallazgo'), $fontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
+        $table3->addCell(1000, $styleFirstCell)->addText(htmlspecialchars('Recomendación'), $fontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
+        
        
         $table3->addRow(0);
         //Agregar textrun de un listado con un indice con numeros con negritas y despues texto sin negritas justificado
-        
-        $textRun = $table3->addCell(1500)->addTextRun(array('align' => 'lowKashida'));
-        $textRun->addText("Con fundamento en los artículos 129 párrafo primero y 130 de la ConstituciónPolítica del Estado Libre y Soberano de México; 11 fracción I de la Ley de Bienes del Estado de México y de sus Municipios; 91 fracción XI de la Ley Orgánica Municipal del Estado de México; Octogésimo Sexto de los Lineamientos para el Registro y Control del Inventario y la Conciliación y Desincorporación de Bienes Muebles e Inmuebles para las Entidades Fiscalizables Municipales del Estado de México, de fecha 11 de julio de 2013; y 14 fracciones I, III, VIII, IX, XIII, XVI, XVII, XVIII, XIX, XX Y XXIV del Reglamento Interno de la Administración Pública Municipal de Tlalnepantla de Baz, Estado de México publicado en la Gaceta Municipal No. 10, de fecha 22 de febrero de 2022; se recomienda en el ámbito de su competencia de realizar la búsqueda de los ".$bmfTotal." bienes muebles, considerando la información vertida en el último Resguardo que permitirá conocer a los servidores públicos responsables de su conservación y custodia. 
 
-Para los bienes muebles que se encuentran en el supuesto de bienes muebles No Localizados, el área administrativa y la Subdirección de Patrimonio Municipal, deberán de levantar el Acta Administrativa ante el Órgano Interno de Control, considerando que no pertenezcan al período constitucional de la administración pública municipal 2022-2024, es decir, de Bienes Muebles No Localizados  
-", 'pFont', 'pStyle');
 
         $textRun = $table3->addCell(1000)->addTextRun(array('align' => 'lowKashida'));
         $textRun->addText("1)	", $fontStyle, array('fontWeight' => 'bold'));
         $textRun->addText("En el Primer Levantamiento Físico de Bienes Muebles de 2022, en uso y custodia de la Presidencia Municipal, se testificó la existencia física de " . $bmpTotal . " bienes muebles, de los cuales " . $bmpActivoFijo . "  son de activo fijo y " . $bmpBajoCosto . "  de bajo costo,de un universo de " . ($bmpTotal + $bmfTotal) . "  que se describen en el “LISTADO DE BIENES MUEBLES DEL PRIMER LEVANTAMIENTO FÍSICO 2022 CON CIFRAS AL 31 DE DICIEMBRE DE 2021, DE LA" . $respuesta["FCAREA"] . " ”, emitido por la Subdirección de Patrimonio Municipal de la Secretaría del Ayuntamiento; En ese contexto existen " . $bmfTotal . " bienes muebles no presentados, de los cuales " . $bmfActivoFijo . "  son de activo fijo y " . $bmfBajoCosto . "  de bajo costo. Por lo anterior X  tienen la leyenda “Bien marcado como faltante en la cuenta pública 2015, se propone para baja conforme al artículo Sexagésimo Noveno y Septuagésimo, Sección Quinta, de los bienes muebles no localizados”, mismos que se detallan en el anexo A.", 'pFont', 'pStyle');
 
 
+        $textRun = $table3->addCell(1500)->addTextRun(array('align' => 'lowKashida'));
+        $textRun->addText("Con fundamento en los artículos 129 párrafo primero y 130 de la ConstituciónPolítica del Estado Libre y Soberano de México; 11 fracción I de la Ley de Bienes del Estado de México y de sus Municipios; 91 fracción XI de la Ley Orgánica Municipal del Estado de México; Octogésimo Sexto de los Lineamientos para el Registro y Control del Inventario y la Conciliación y Desincorporación de Bienes Muebles e Inmuebles para las Entidades Fiscalizables Municipales del Estado de México, de fecha 11 de julio de 2013; y 14 fracciones I, III, VIII, IX, XIII, XVI, XVII, XVIII, XIX, XX Y XXIV del Reglamento Interno de la Administración Pública Municipal de Tlalnepantla de Baz, Estado de México publicado en la Gaceta Municipal No. 10, de fecha 22 de febrero de 2022; se recomienda en el ámbito de su competencia de realizar la búsqueda de los ".$bmfTotal." bienes muebles, considerando la información vertida en el último Resguardo que permitirá conocer a los servidores públicos responsables de su conservación y custodia. 
+
+Para los bienes muebles que se encuentran en el supuesto de bienes muebles No Localizados, el área administrativa y la Subdirección de Patrimonio Municipal, deberán de levantar el Acta Administrativa ante el Órgano Interno de Control, considerando que no pertenezcan al período constitucional de la administración pública municipal 2022-2024, es decir, de Bienes Muebles No Localizados  
+", 'pFont', 'pStyle');
+
+
 
 
         $table3->addRow(0);
         //Agregar textrun de un listado con un indice con numeros con negritas y despues texto sin negritas justificado
-
-        $textRun = $table3->addCell(1500)->addTextRun(array('align' => 'lowKashida'));
-        $textRun->addText("Con fundamento en los artículos 129 párrafo primero y 130 de la Constitución Política del Estado Libre y Soberano de México; 11 fracción I de la Ley de Bienes del Estado de México y de sus Municipios; 91 fracción XI de la Ley Orgánica Municipal del Estado de México; Capítulos XV, XVI y XIX de los Lineamientos para el Registro y Control del Inventario y la Conciliación y Desincorporación de Bienes Muebles e Inmuebles para las Entidades Fiscalizables Municipales del Estado de México, de fecha 11 de julio de 2013; y 14 fracciones I, III, VIII, IX, XIII, XVI, XVII, XVIII, XIX, XX y XXIV del Reglamento Interno de la Administración Pública Municipal de Tlalnepantla de Baz, Estado de México publicado en la Gaceta Municipal No. 10, de fecha 22 de febrero de 2022 se recomienda en el ámbito de su competencia documentar la legal procedencia de los X  bienes muebles que no se relacionan en el “Listado de Bienes Muebles del Primer Levantamiento Físico 2022, con cifras al 31 de Diciembre de 2021”.", 'pFont', 'pStyle');
-
         $textRun = $table3->addCell(1000)->addTextRun(array('align' => 'lowKashida'));
         $textRun->addText("2)	", $fontStyle, array('fontWeight' => 'bold'));
         $textRun->addText("Existe además un total de X  bienes muebles sobrantes con etiqueta de inventario, pero no relacionadas en el “Listado de Bienes Muebles Primer Levantamiento Físico 2022, de laPresidencia Municipal ”, mismos que se detallan en el anexo B.", 'pFont', 'pStyle');
 
+        $textRun = $table3->addCell(1500)->addTextRun(array('align' => 'lowKashida'));
+        $textRun->addText("Con fundamento en los artículos 129 párrafo primero y 130 de la Constitución Política del Estado Libre y Soberano de México; 11 fracción I de la Ley de Bienes del Estado de México y de sus Municipios; 91 fracción XI de la Ley Orgánica Municipal del Estado de México; Capítulos XV, XVI y XIX de los Lineamientos para el Registro y Control del Inventario y la Conciliación y Desincorporación de Bienes Muebles e Inmuebles para las Entidades Fiscalizables Municipales del Estado de México, de fecha 11 de julio de 2013; y 14 fracciones I, III, VIII, IX, XIII, XVI, XVII, XVIII, XIX, XX y XXIV del Reglamento Interno de la Administración Pública Municipal de Tlalnepantla de Baz, Estado de México publicado en la Gaceta Municipal No. 10, de fecha 22 de febrero de 2022 se recomienda en el ámbito de su competencia documentar la legal procedencia de los X  bienes muebles que no se relacionan en el “Listado de Bienes Muebles del Primer Levantamiento Físico 2022, con cifras al 31 de Diciembre de 2021”.", 'pFont', 'pStyle');
+
+        
         $section->addTextBreak();
 
         $table4 = $section->addTable(array('unit' => \PhpOffice\PhpWord\Style\Table::WIDTH_PERCENT, 'width' => 100 * 50, 'borderSize' => 1, 'borderColor' => '000000', 'cellMargin' => 50, 'align' => 'center'));
@@ -494,18 +499,12 @@ Para los bienes muebles que se encuentran en el supuesto de bienes muebles No Lo
         $section->addText("Sin otro particular, le reitero a usted, mi más atenta y distinguida consideración.", 'pFont');
         $textRun->addTextBreak();
         $textRun->addTextBreak();
-        $textRun->addTextBreak();
-        $textRun->addTextBreak();
-        $textRun->addTextBreak();
-        $textRun->addTextBreak();
-        $textRun->addTextBreak();
         
         $section->addText("A T E N T A M E N T E", 'fFirmaTitulo', 'pFirmaTitulo');
         $section->addTextBreak();
         $section->addTextBreak();
         $section->addText("L.A.E. EDUARDO EFRAÍN BENHUMEA MACEDO", 'fFirmaTitulo', 'pFirmaTitulo');
-        $section->addTextBreak();
-        $section->addTextBreak();
+
         $section->addText("CONTRALOR INTERNO MUNICIPAL", 'fFirmaTitulo', 'pFirmaTitulo');
         $section->addTextBreak();
         $section->addTextBreak();
