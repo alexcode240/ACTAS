@@ -71,7 +71,7 @@ class ModelActas
                                                     IFNULL((SELECT FCNOMBRE FROM tbempleados WHERE tbempleados.FIAREAID = AREAS.FIAREAID AND tbempleados.FICARGOID = 3 GROUP BY FIAREAID),' ') AS FCJEFEPATRIMONIO,
                                                     IFNULL((SELECT FCNOMBRE FROM tbempleados WHERE tbempleados.FIAREAID = AREAS.FIAREAID AND tbempleados.FICARGOID = 4 GROUP BY FIAREAID),' ') AS FCSSINDICATURA,
                                                     IFNULL((SELECT FCNOMBRE FROM tbempleados WHERE tbempleados.FIAREAID = AREAS.FIAREAID AND tbempleados.FICARGOID = 5 GROUP BY FIAREAID),' ') AS FCENLACE,
-                                                    IFNULL((SELECT FCNOMBRE FROM tbempleados WHERE tbempleados.FIAREAID = AREAS.FIAREAID AND tbempleados.FICARGOID = 8 GROUP BY FIAREAID),' ') AS FCDIRECCION,
+                                                    IFNULL((SELECT FCNOMBRE FROM tbempleados WHERE tbempleados.FIAREAID = AREAS.FIAREAID AND tbempleados.FICARGOID = 8 GROUP BY FIAREAID),' ') AS FCJEFEDIRECCION,
                                                     IFNULL((SELECT FCTIPOCARGO FROM tbempleados WHERE tbempleados.FIAREAID = AREAS.FIAREAID AND tbempleados.FICARGOID = 8 GROUP BY FIAREAID),' ') AS FCCARGODIRECCION,
                                                     IFNULL((SELECT FCEMPLEADO FROM tbempleados WHERE tbempleados.FIAREAID = AREAS.FIAREAID AND tbempleados.FICARGOID = 1 GROUP BY FIAREAID),' ') AS FCNUMCONTRALOR,
                                                     IFNULL((SELECT FCEMPLEADO FROM tbempleados WHERE tbempleados.FIAREAID = AREAS.FIAREAID AND tbempleados.FICARGOID = 2 GROUP BY FIAREAID),' ') AS FCNUMPATRIMONIO,
