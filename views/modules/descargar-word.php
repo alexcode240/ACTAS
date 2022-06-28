@@ -196,9 +196,7 @@ class WordController
         $styleFirstCell = array('valign' => 'center', 'bgColor' => '9c9c9c');
         $styleFirstSpan = array('valign' => 'center', 'bgColor' => '9c9c9c', 'gridSpan' => 3);
         $styleFirstCell2 = array('valign' => 'center', 'bgColor' => '9c9c9c', 'borderBottomColor' => '9c9c9c', 'borderBottomSize' => '5');
-        $styleFirstCellInvisible = array('valign' => 'center', 'bgColor' => '9c9c9c', 'borderLeftColor' => '9c9c9c', 'borderBottomSize' => '5');
         
-
         $fontStyle = array('bold' => true, 'align' => 'center', 'size' => 11, 'name' => 'Tahoma');
         $cellFontStyle = array('color' => 'ff0000', 'bold' => true, 'align' => 'center', 'size' => 11, 'name' => 'Tahoma');
 
@@ -420,7 +418,7 @@ class WordController
         $section->addText("Físico de Bienes Muebles " . $fechaDeActa[0] . " de la",'dpFont', 'dpStyle');
         $section->addText($respuesta["FCAREA"],'dpFont', 'dpStyle');
 
-        $section->addText($respuesta["FCJEFEDIRECCION"], 'itFont', 'itStyle');
+        $section->addText($respuesta["FCDIRECCION"], 'itFont', 'itStyle');
         $section->addText($respuesta["FCCARGODIRECCION"], 'itFont', 'itStyle');
         $section->addText("PRESENTE", 'itFont', 'itStyle');
 
@@ -431,7 +429,6 @@ class WordController
 
         $table3 = $section->addTable(array('unit' => \PhpOffice\PhpWord\Style\Table::WIDTH_PERCENT, 'width' => 100 * 50, 'borderSize' => 1, 'borderColor' => '000000', 'cellMargin' => 50, 'align' => 'center'));
         $table3->addRow(-300);
-        $table3->addCell(50, $styleFirstCellInvisible)->addText(htmlspecialchars(''), $fontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
         $table3->addCell(1500, $styleFirstCell)->addText(htmlspecialchars('Hallazgo'), $fontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
         $table3->addCell(1000, $styleFirstCell)->addText(htmlspecialchars('Recomendación'), $fontStyle, array('fontWeight' => 'bold', 'align' => 'center'));
         
@@ -439,8 +436,9 @@ class WordController
         $table3->addRow(0);
         //Agregar textrun de un listado con un indice con numeros con negritas y despues texto sin negritas justificado
 
-        $table3->addCell(50)->addText(htmlspecialchars('1)'), $fontStyle, array('fontWeight' => 'bold'));
+
         $textRun = $table3->addCell(1000)->addTextRun(array('align' => 'lowKashida'));
+        $textRun->addText("1)	", $fontStyle, array('fontWeight' => 'bold'));
         $textRun->addText("En el Primer Levantamiento Físico de Bienes Muebles de 2022, en uso y custodia de la Presidencia Municipal, se testificó la existencia física de " . $bmpTotal . " bienes muebles, de los cuales " . $bmpActivoFijo . "  son de activo fijo y " . $bmpBajoCosto . "  de bajo costo,de un universo de " . ($bmpTotal + $bmfTotal) . "  que se describen en el “LISTADO DE BIENES MUEBLES DEL PRIMER LEVANTAMIENTO FÍSICO 2022 CON CIFRAS AL 31 DE DICIEMBRE DE 2021, DE LA" . $respuesta["FCAREA"] . " ”, emitido por la Subdirección de Patrimonio Municipal de la Secretaría del Ayuntamiento; En ese contexto existen " . $bmfTotal . " bienes muebles no presentados, de los cuales " . $bmfActivoFijo . "  son de activo fijo y " . $bmfBajoCosto . "  de bajo costo. Por lo anterior X  tienen la leyenda “Bien marcado como faltante en la cuenta pública 2015, se propone para baja conforme al artículo Sexagésimo Noveno y Septuagésimo, Sección Quinta, de los bienes muebles no localizados”, mismos que se detallan en el anexo A.", 'pFont', 'pStyle');
 
 
@@ -454,11 +452,9 @@ Para los bienes muebles que se encuentran en el supuesto de bienes muebles No Lo
 
         if ($this->bienesSob == "true") {
             $table3->addRow(0);
-            $table3->addCell(50)->addText(htmlspecialchars('2)'), $fontStyle, array('fontWeight' => 'bold'));
-            $textRun = $table3->addCell(1000)->addTextRun(array('align' => 'lowKashida'));
             //Agregar textrun de un listado con un indice con numeros con negritas y despues texto sin negritas justificado
             $textRun = $table3->addCell(1000)->addTextRun(array('align' => 'lowKashida'));
-            //$textRun->addText("2)	", $fontStyle, array('fontWeight' => 'bold'));
+            $textRun->addText("2)	", $fontStyle, array('fontWeight' => 'bold'));
             $textRun->addText("Existe además un total de X  bienes muebles sobrantes con etiqueta de inventario, pero no relacionadas en el “Listado de Bienes Muebles Primer Levantamiento Físico 2022, de laPresidencia Municipal ”, mismos que se detallan en el anexo B.", 'pFont', 'pStyle');
 
             $textRun = $table3->addCell(1500)->addTextRun(array('align' => 'lowKashida'));
