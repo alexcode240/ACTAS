@@ -11,7 +11,7 @@ class ModelActas
     {
         $connect = Connection::connect();
 
-        $stmt = $connect->prepare("INSERT INTO $tabla(FCFOLIO, FIAREAID, FIOFICIOID, FCFECHAFIN, FDFECHAFIN, FCFECHA, FDFECHA) VALUES (:FCFOLIO, :FIAREAID, :FIOFICIOID, :FCFECHAFIN, :FDFECHAFIN, :FCFECHA, :FDFECHA)");
+        $stmt = $connect->prepare("INSERT INTO $tabla(FCFOLIO, FIAREAID, FIOFICIOID, FCFECHAFIN, FDFECHAFIN, FCFECHA, FDFECHA, FCFECHACREACIONINFORME, FDFECHACREACIONINFORME, FCOFICIOINFORME) VALUES (:FCFOLIO, :FIAREAID, :FIOFICIOID, :FCFECHAFIN, :FDFECHAFIN, :FCFECHA, :FDFECHA, :FCFECHACREACIONINFORME, :FDFECHACREACIONINFORME, :FCOFICIOINFORME)");
 
         $stmt->bindParam(":FCFOLIO", $datos["FCFOLIO"], PDO::PARAM_STR);
         $stmt->bindParam(":FIAREAID", $datos["FIAREAID"], PDO::PARAM_INT);
@@ -20,6 +20,9 @@ class ModelActas
         $stmt->bindParam(":FDFECHAFIN", $datos["FDFECHAFIN"], PDO::PARAM_STR);
         $stmt->bindParam(":FCFECHA", $datos["FCFECHA"], PDO::PARAM_STR);
         $stmt->bindParam(":FDFECHA", $datos["FDFECHA"], PDO::PARAM_STR);
+        $stmt->bindParam(":FCFECHACREACIONINFORME", $datos["FCFECHACREACIONINFORME"], PDO::PARAM_STR);
+        $stmt->bindParam(":FDFECHACREACIONINFORME", $datos["FDFECHACREACIONINFORME"], PDO::PARAM_STR);
+        $stmt->bindParam(":FCOFICIOINFORME", $datos["FCOFICIOINFORME"], PDO::PARAM_STR);
 
 
         if ($stmt->execute()) {
@@ -50,6 +53,9 @@ class ModelActas
                                                     tbactas.FDFECHAFIN AS FDFECHAFINACTA,
                                                     tbactas.FCFECHA AS FCFECHAACTA, 
                                                     tbactas.FDFECHA AS FDFECHAACTA, 
+                                                    tbactas.FCFECHACREACIONINFORME AS FCFECHACREACIONINFORME,
+                                                    tbactas.FDFECHACREACIONINFORME AS FDFECHACREACIONINFORME,
+                                                    tbactas.FCOFICIOINFORME AS FCOFICIOINFORME,
                                                     AREAS.FCAREA, 
                                                     AREAS.FCDIRECCION, 
                                                     AREAS.FINUMAREA,

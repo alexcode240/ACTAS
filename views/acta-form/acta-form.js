@@ -402,6 +402,13 @@ $("#fechaFinLevantamiento").datetimepicker({
   },
 });
 
+$("#fechaCreacionInforme").datetimepicker({
+  format: "YYYY-MM-DD HH:mm",
+  icons: {
+    time: "far fa-clock",
+  },
+});
+
 let validarDatos = () => {
   let validacion = true;
 
@@ -493,6 +500,20 @@ let validarDatos = () => {
     $(".fechaFinElaboracion").addClass("is-invalid");
   } else {
     $(".fechaFinElaboracion").removeClass("is-invalid");
+  }
+
+  if ($(".fechaCreacionInforme").val() == "") {
+    validacion = false;
+    $(".fechaCreacionInforme").addClass("is-invalid");
+  } else {
+    $(".fechaCreacionInforme").removeClass("is-invalid");
+  }
+
+  if ($("#oficioInforme").val() == "") {
+    validacion = false;
+    $("#oficioInforme").addClass("is-invalid");
+  } else {
+    $("#oficioInforme").removeClass("is-invalid");
   }
   
   return validacion;
@@ -596,6 +617,16 @@ $("#generarActa")
     if (!$("#bienesSobrantes").is(":checked")) {
       bienesSobrantes = false;
     } 
+
+    let fcFechaCreacionInforme = fechaEnPalabras(
+      extraerNumerosFecha($(".fechaCreacionInforme").val(), true),
+      true
+    );
+    fcFechaCreacionInforme = JSON.stringify(fcFechaCreacionInforme);
+
+    let fdFechaCreacionInforme = $(".fechaCreacionInforme").val();
+
+    let fcOficioInforme = $(".oficioInforme").val();
     
     var datos = new FormData();
     datos.append("FCOFICIO", folio);
@@ -617,6 +648,9 @@ $("#generarActa")
     datos.append("FIBMPBAJOCOSTO", bmpBajoCosto);
     datos.append("FIBMFACTIVOFIJO", bmfActivoFijo);
     datos.append("FIBMFBAJOCOSTO", bmfBajoCosto);
+    datos.append("FCFECHACREACIONINFORME", fcFechaCreacionInforme);
+    datos.append("FDFECHACREACIONINFORME", fdFechaCreacionInforme);
+    datos.append("FCOFICIOINFORME", fcOficioInforme);
 
     
     $.ajax({

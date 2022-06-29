@@ -395,10 +395,10 @@ class WordController
         $section->addTextBreak();
         $section->addTextBreak();
 
-        
-        $fechaDeActa = $respuesta["FDFECHAACTA"];
+        $fechaInforme = json_decode($respuesta["FCFECHACREACIONINFORME"], true);
+        $fechaDeActa = substr($respuesta["FDFECHACREACIONINFORME"], 0, 10);
         $fechaDeActa = explode("-", $fechaDeActa);
-        $fechaDeActa = $fechaDeActa[2]." de ".$fechaElaboracion["mes"]." de ".$fechaDeActa[0];
+        $fechaDeActa = $fechaDeActa[2]." de ". $fechaInforme["mes"]." de ".$fechaDeActa[0];
         
         $textRun = $section->addTextRun('dtStyle');
         $textRun->addText("Fecha: ", 'dtFont', 'dtStyle');
@@ -406,7 +406,7 @@ class WordController
 
         $textRun = $section->addTextRun('dtStyle');
         $textRun->addText("No. de Oficio: ", 'dtFont', 'dtStyle');
-        $textRun->addText($respuesta["FCFOLIO"], 'dpFont', 'dpStyle');
+        $textRun->addText($respuesta["FCOFICIOINFORME"], 'dpFont', 'dpStyle');
 
         $textRun = $section->addTextRun('dtStyle');
         $textRun->addText("Asunto: ", 'dtFont', 'dtStyle');
@@ -418,13 +418,13 @@ class WordController
         $section->addText("Físico de Bienes Muebles " . $fechaDeActa[0] . " de la",'dpFont', 'dpStyle');
         $section->addText($respuesta["FCAREA"],'dpFont', 'dpStyle');
 
-        $section->addText($respuesta["FCDIRECCION"], 'itFont', 'itStyle');
+        $section->addText($respuesta["FCJEFEDIRECCION"], 'itFont', 'itStyle');
         $section->addText($respuesta["FCCARGODIRECCION"], 'itFont', 'itStyle');
         $section->addText("PRESENTE", 'itFont', 'itStyle');
 
   
 
-        $section->addText("Con fundamento en lo dispuesto en los artículos 1, 2 fracción III, 5 fracción I, 13 fracción I, 14 fracción II, 17, 18 fracción VI, 52, 67 y 68 de la Ley de Bienes del Estado de México y de sus Municipios; 112 fracciones XV y XX de la Ley Orgánica Municipal del Estado de México; 174, 175, 176 fracción III, 177 fracciones I y XII, 178, 179 fracciones I, II, III, IV, IX y XII, 193 fracción I, 194 fracciones V y VI, 195 fracciones I, III, IV, VI y X y 196 del Reglamento Interno de la Administración Pública Municipal de Tlalnepantla de Baz, Estado de México, publicado en la Gaceta Municipal No. 10, de fecha 22 de febrero de 2022; así  en los numerales Primero, Noveno fracciones V, VII, VIII, IX, XIII, XXI, XXX, XXXII, XXXIII, XL, XLII y XLV, Decimo fracción I, Vigésimo, Vigésimo Primero, Trigésimo Séptimo, Trigésimo Octavo, Trigésimo Noveno fracciones I, II, III, IV y V y Cuadragésimo de los Lineamientos para el Registro y Control del Inventario y la Conciliación y Desincorporación de Bienes Muebles e Inmuebles para las Entidades Fiscalizables Municipales del Estado de México, publicados en la Gaceta del Gobierno del Estado de México, de fecha 11 de julio de 2013; en el Acta de la Primera Sesión Ordinaria del Comité de Bienes Muebles e Inmuebles de Tlalnepantla de Baz, México 2022-2024; en el oficio número ".$respuesta["FCFOLIO"]." , de fecha ".$fechaElaboracion["dia"]." de ".$fechaElaboracion["mes"]."  del año en curso, le notifico el Resultado del Primer Levantamiento Físico de Bienes Muebles 2022, realizado del ".$fechaLevantamiento["dia"]." al ".$fechaFinElaboracion["dia"]." de ".$fechaElaboracion["mes"]." de ".$fechaElaboracion["anio"]." del presente año.", 'pFont', 'pStyle');
+        $section->addText("Con fundamento en lo dispuesto en los artículos 1, 2 fracción III, 5 fracción I, 13 fracción I, 14 fracción II, 17, 18 fracción VI, 52, 67 y 68 de la Ley de Bienes del Estado de México y de sus Municipios; 112 fracciones XV y XX de la Ley Orgánica Municipal del Estado de México; 174, 175, 176 fracción III, 177 fracciones I y XII, 178, 179 fracciones I, II, III, IV, IX y XII, 193 fracción I, 194 fracciones V y VI, 195 fracciones I, III, IV, VI y X y 196 del Reglamento Interno de la Administración Pública Municipal de Tlalnepantla de Baz, Estado de México, publicado en la Gaceta Municipal No. 10, de fecha 22 de febrero de 2022; así  en los numerales Primero, Noveno fracciones V, VII, VIII, IX, XIII, XXI, XXX, XXXII, XXXIII, XL, XLII y XLV, Decimo fracción I, Vigésimo, Vigésimo Primero, Trigésimo Séptimo, Trigésimo Octavo, Trigésimo Noveno fracciones I, II, III, IV y V y Cuadragésimo de los Lineamientos para el Registro y Control del Inventario y la Conciliación y Desincorporación de Bienes Muebles e Inmuebles para las Entidades Fiscalizables Municipales del Estado de México, publicados en la Gaceta del Gobierno del Estado de México, de fecha 11 de julio de 2013; en el Acta de la Primera Sesión Ordinaria del Comité de Bienes Muebles e Inmuebles de Tlalnepantla de Baz, México 2022-2024; en el oficio número ".$respuesta["FCOFICIO"]." , de fecha ".$fechaOficio["dia"]." de ".$fechaOficio["mes"]."  del año en curso, le notifico el Resultado del Primer Levantamiento Físico de Bienes Muebles 2022, realizado del ".$fechaLevantamiento["dia"]." al ".$fechaFinLevantamiento["dia"]." de ".$fechaLevantamiento["mes"]." de ".$fechaLevantamiento["anio"]." del presente año.", 'pFont', 'pStyle');
   
 
         $table3 = $section->addTable(array('unit' => \PhpOffice\PhpWord\Style\Table::WIDTH_PERCENT, 'width' => 100 * 50, 'borderSize' => 1, 'borderColor' => '000000', 'cellMargin' => 50, 'align' => 'center'));

@@ -25,6 +25,9 @@ class AjaxCrearActa {
     public $bmpBajoCosto;
     public $bmfActivoFijo;
     public $bmfBajoCosto;
+    public $fcFechaCreacionInforme;
+    public $fdFechaCreacionInforme;
+    public $fcOficioInforme;
 
 
     public function ajaxNuevaActa(){
@@ -64,7 +67,10 @@ class AjaxCrearActa {
                     "FCFECHAFIN" => $this -> fcFechaFinElaboracionActa,
                     "FDFECHAFIN" => $this -> fdFechaFinElaboracionActa,
                     "FCFECHA" => $this -> fcFechaElaboracionActa,
-                    "FDFECHA" => $this -> fdFechaElaboracionActa
+                    "FDFECHA" => $this -> fdFechaElaboracionActa,
+                    "FCFECHACREACIONINFORME" => $this->fcFechaCreacionInforme,
+                    "FDFECHACREACIONINFORME" => $this->fdFechaCreacionInforme,
+                    "FCOFICIOINFORME" => $this->fcOficioInforme
                 );
 
                 $respuestaActa = ModelActas::mdlCrearActa($tablaActas, $datosActa);
@@ -125,5 +131,8 @@ if(isset($_POST['FCOFICIO'])){
     $crearActa -> bmpBajoCosto = $_POST['FIBMPBAJOCOSTO'];
     $crearActa -> bmfActivoFijo = $_POST['FIBMFACTIVOFIJO'];
     $crearActa -> bmfBajoCosto = $_POST['FIBMFBAJOCOSTO'];
+    $crearActa -> fcFechaCreacionInforme = $_POST['FCFECHACREACIONINFORME'];
+    $crearActa -> fdFechaCreacionInforme = $_POST['FDFECHACREACIONINFORME'];
+    $crearActa -> fcOficioInforme = $_POST['FCOFICIOINFORME'];
     $crearActa -> ajaxNuevaActa();
 }

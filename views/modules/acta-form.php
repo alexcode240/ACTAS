@@ -190,6 +190,27 @@
                                     </div>
                                 </div>
 
+
+                                <div class="form-group col-6">
+                                    <label>Fecha de creación del informe</label>
+                                    <div class="input-group date" id="fechaCreacionInforme" data-target-input="nearest">
+                                        <input type="text" class="form-control datetimepicker-input fechaCreacionInforme" name="fechaCreacionInforme" data-target="#fechaCreacionInforme" />
+                                        <div class="input-group-append" data-target="#fechaCreacionInforme" data-toggle="datetimepicker">
+                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-6">
+                                    <label>Número de oficio del informe</label>
+                                    <div class="input-group">
+                                        <input type="text" min="0" class="form-control oficioInforme" id="oficioInforme" name="oficioInforme">
+                                        <div class="input-group-append">
+                                            <div class="input-group-text"><i class="fa fa-hashtag"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="form-group col-lg-2 text-left">
                                     <label for="bienesSobrantes">¿Existen bienes muebles sobrantes?</label>
                                     <div class="input-group pull-left bienesSobrantes">
@@ -202,7 +223,7 @@
 
                                     </div>
                                 </div>
-                                
+
                                 <a id="descargarWord" href="" style="display:none">Descargar Acta</a>
                                 <button type="button" id="generarActa" class="btn btn-primary float-right">Generar Acta</button>
                                 <!-- Date -->
